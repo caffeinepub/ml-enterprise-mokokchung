@@ -2,11 +2,9 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-the-contact-section-business-details-to-show-the-provided-ml-enterprise-address-phone-number-and-email-id-replace-the-current-placeholder-contact-info-use-the-exact-values-address-tongdentsuyong-ward-a-m-road-mokokchung-nagaland-798601-phone-9366012115-email-mlenterprisemkg-gmail-com",
-      "featureTitle": "Update the Contact section business details to show the provided ML Enterprise address, phone number, and email ID (replace the current placeholder contact info). Use the exact values:\n- Address: \"Tongdentsuyong Ward, A.M Road, Mokokchung, Nagaland 798601\"\n- Phone: \"9366012115\"\n- Email: \"mlenterprisemkg@gmail.com\"",
-      "files": [
-        "frontend/src/components/site/sections/ContactSection.tsx"
-      ],
+      "featureId": "feature-add-the-uploaded-logo-image-logo-2-jpeg-to-the-frontend-as-optimized-static-assets-under-frontend-public-assets-generated-ensuring-the-files-exist-at-the-exact-paths-already-referenced-by-the-app",
+      "featureTitle": "Add the uploaded logo image (LOGO-2.jpeg) to the frontend as optimized static assets under frontend/public/assets/generated, ensuring the files exist at the exact paths already referenced by the app.",
+      "files": [],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
@@ -15,25 +13,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-12"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-update-the-site-footer-contact-details-to-match-the-provided-address-phone-number-and-email-id-replace-the-current-placeholder-values",
-      "featureTitle": "Update the site footer contact details to match the provided address, phone number, and email ID (replace the current placeholder values).",
-      "files": [
-        "frontend/src/components/site/SiteFooter.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-13"
+        "REQ-1"
       ],
       "confidence": "high"
     }

@@ -1,36 +1,65 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Update contact details in Contact section and footer",
+  "title": "Restore ML Enterprise logo assets, header/footer branding, and favicon",
   "requirements": [
     {
-      "id": "REQ-12",
-      "summary": "Replace placeholder Contact section business details with the provided ML Enterprise address, phone, and email while keeping Business Hours unchanged.",
+      "id": "REQ-1",
+      "summary": "Add optimized ML Enterprise logo and favicon static assets at the exact public paths already referenced by the app.",
       "acceptanceCriteria": [
-        "In `frontend/src/components/site/sections/ContactSection.tsx`, the 'Location', 'Phone', and 'Email' cards display the provided address/phone/email instead of placeholders.",
-        "Business Hours remains unchanged unless explicitly provided otherwise.",
-        "All user-facing text remains in English."
+        "The following files exist in the deployed build at these exact public paths: /assets/generated/ml-enterprise-logo.dim_512x512.png, /assets/generated/ml-enterprise-logo.dim_128x128.png, /assets/generated/ml-enterprise-favicon.dim_32x32.png",
+        "The generated logo assets have a transparent background and appear as a crisp black wordmark on all standard displays"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/site/sections/ContactSection.tsx",
-          "operation": "modify",
-          "description": "Update the `contactInfo` entries for 'Location', 'Phone', and 'Email' to exactly:\n- Address: \"Tongdentsuyong Ward, A.M Road, Mokokchung, Nagaland 798601\"\n- Phone: \"9366012115\"\n- Email: \"mlenterprisemkg@gmail.com\"\nKeep the existing Business Hours card content unchanged and ensure all displayed text remains in English."
+          "path": "frontend/public/assets/generated/ml-enterprise-logo.dim_512x512.png",
+          "operation": "create",
+          "description": "Create/restore the 512x512 PNG logo asset (derived from LOGO-2.jpeg) with transparent background and crisp black wordmark at this exact path so existing <img> references resolve."
+        },
+        {
+          "path": "frontend/public/assets/generated/ml-enterprise-logo.dim_128x128.png",
+          "operation": "create",
+          "description": "Create/restore the 128x128 PNG logo asset (derived from LOGO-2.jpeg) with transparent background and crisp black wordmark at this exact path for any smaller-size usage."
+        },
+        {
+          "path": "frontend/public/assets/generated/ml-enterprise-favicon.dim_32x32.png",
+          "operation": "create",
+          "description": "Create/restore the 32x32 PNG favicon asset (simplified black logo mark on transparent background) at this exact path so existing favicon <link> references resolve."
         }
       ]
     },
     {
-      "id": "REQ-13",
-      "summary": "Update footer contact details to match the provided address, phone, and email without causing mobile layout overflow.",
+      "id": "REQ-2",
+      "summary": "Ensure the header and footer render the ML Enterprise logo using the existing /assets/generated/ml-enterprise-logo.dim_512x512.png reference.",
       "acceptanceCriteria": [
-        "In `frontend/src/components/site/SiteFooter.tsx`, the Contact list shows the provided address, phone, and email instead of the current placeholders.",
-        "Footer continues to render without layout overflow on mobile widths."
+        "The logo is visible in the header (top-left) and footer brand block with no broken image icon",
+        "The logo image loads successfully (HTTP 200) from /assets/generated/ml-enterprise-logo.dim_512x512.png in the deployed build"
       ],
       "file_operations": [
         {
+          "path": "frontend/src/components/site/SiteHeader.tsx",
+          "operation": "modify",
+          "description": "Verify/restore the header logo <img> continues to reference exactly /assets/generated/ml-enterprise-logo.dim_512x512.png and renders reliably (no broken src), without changing navigation/structure beyond what is necessary."
+        },
+        {
           "path": "frontend/src/components/site/SiteFooter.tsx",
           "operation": "modify",
-          "description": "Replace the footer Contact list placeholder values with the exact provided:\n- \"Tongdentsuyong Ward, A.M Road, Mokokchung, Nagaland 798601\"\n- \"9366012115\"\n- \"mlenterprisemkg@gmail.com\"\nPreserve the existing business hours line. Add/adjust Tailwind utility classes on the contact list items (e.g., enabling wrapping like `break-words` / `whitespace-normal`) as needed to prevent overflow on narrow/mobile widths while keeping content in English."
+          "description": "Verify/restore the footer brand block logo <img> continues to reference exactly /assets/generated/ml-enterprise-logo.dim_512x512.png and renders reliably (no broken src), without changing navigation/structure beyond what is necessary."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Ensure the favicon loads correctly via the existing reference in frontend/index.html to /assets/generated/ml-enterprise-favicon.dim_32x32.png.",
+      "acceptanceCriteria": [
+        "Browser tab shows the favicon when loading the app",
+        "/assets/generated/ml-enterprise-favicon.dim_32x32.png is present and returns HTTP 200 in the deployed build"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/index.html",
+          "operation": "modify",
+          "description": "Verify/restore the existing favicon <link> tags reference exactly /assets/generated/ml-enterprise-favicon.dim_32x32.png so the browser tab favicon loads correctly in the deployed build."
         }
       ]
     }

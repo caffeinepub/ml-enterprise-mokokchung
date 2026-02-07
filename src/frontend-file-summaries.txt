@@ -10,5 +10,6 @@
   "frontend/src/components/site/sections/ContactSection.tsx": "Contact section with ML Enterprise business details (address, phone, email) displayed in cards and a validated inquiry form submitting to backend with success/error states.",
   "frontend/src/components/site/SiteFooter.tsx": "Footer with brand info, quick links, services list, ML Enterprise contact details (address, phone, email), and attribution with caffeine.ai link.",
   "frontend/src/hooks/useSubmitInquiry.ts": "React Query mutation hook for submitting contact inquiries to the backend actor with timestamp.",
-  "frontend/src/lib/validation/contactInquiry.ts": "Client-side validation helper for contact form fields (name, phone, email, message) with error messages."
+  "frontend/src/lib/validation/contactInquiry.ts": "Client-side validation helper for contact form fields (name, phone, email, message) with error messages.",
+  "frontend/index.html": "HTML entry point with favicon references pointing to the ML Enterprise logo favicon asset at /assets/generated/ml-enterprise-favicon.dim_32x32.png."
 }

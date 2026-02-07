@@ -1,14 +1,14 @@
 # Specification
 
 ## Summary
-**Goal:** Update the site’s Contact section and footer to show ML Enterprise’s correct address, phone number, and email.
+**Goal:** Restore ML Enterprise branding by re-adding the logo assets at the exact public paths the app already references, and ensure header/footer + favicon load correctly.
 
 **Planned changes:**
-- Replace placeholder contact details in `frontend/src/components/site/sections/ContactSection.tsx` with:
-  - Address: "Tongdentsuyong Ward, A.M Road, Mokokchung, Nagaland 798601"
-  - Phone: "9366012115"
-  - Email: "mlenterprisemkg@gmail.com"
-- Update `frontend/src/components/site/SiteFooter.tsx` contact details to match the same address, phone, and email.
-- Ensure footer layout remains responsive (no overflow on mobile widths) and keep Business Hours unchanged.
+- Add optimized, transparent PNG logo assets derived from the uploaded LOGO-2.jpeg into `frontend/public/assets/generated/` at these exact paths:
+  - `ml-enterprise-logo.dim_512x512.png`
+  - `ml-enterprise-logo.dim_128x128.png`
+  - `ml-enterprise-favicon.dim_32x32.png`
+- Verify the existing header and footer logo references correctly render using `/assets/generated/ml-enterprise-logo.dim_512x512.png` (no broken image).
+- Verify the existing favicon reference in `frontend/index.html` loads `/assets/generated/ml-enterprise-favicon.dim_32x32.png`.
 
-**User-visible outcome:** Visitors see the correct ML Enterprise address, phone number, and email consistently in both the Contact section and the site footer.
+**User-visible outcome:** The site shows the ML Enterprise logo in the header and footer, and the browser tab displays the favicon, with all assets loading successfully from the expected URLs.
