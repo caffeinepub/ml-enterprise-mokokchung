@@ -1,0 +1,68 @@
+{
+  "kind": "build_request",
+  "title": "Update Contact details (address, phone, email) across Contact section and footer",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-12",
+      "text": "Update the Contact section business details to show the provided ML Enterprise address, phone number, and email ID (replace the current placeholder contact info). Use the exact values:\n- Address: \"Tongdentsuyong Ward, A.M Road, Mokokchung, Nagaland 798601\"\n- Phone: \"9366012115\"\n- Email: \"mlenterprisemkg@gmail.com\"",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-5",
+          "msg-11"
+        ],
+        "quotes": [
+          "Tongdentsuyong Ward, A.M Road \nMokokchung, Nagaland : 798601\nMobile No : 9366012115\nEmail id : mlenterprisemkg@gmail.com\nadd address and phone no and email id",
+          "yes"
+        ]
+      },
+      "acceptanceCriteria": [
+        "In `frontend/src/components/site/sections/ContactSection.tsx`, the 'Location', 'Phone', and 'Email' cards display the provided address/phone/email instead of placeholders.",
+        "Business Hours remains unchanged unless explicitly provided otherwise.",
+        "All user-facing text remains in English."
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "text": "Update the site footer contact details to match the provided address, phone number, and email ID (replace the current placeholder values).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-5",
+          "msg-11"
+        ],
+        "quotes": [
+          "add address and phone no and email id",
+          "yes"
+        ]
+      },
+      "acceptanceCriteria": [
+        "In `frontend/src/components/site/SiteFooter.tsx`, the Contact list shows the provided address, phone, and email instead of the current placeholders.",
+        "Footer continues to render without layout overflow on mobile widths."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify any files under `frontend/src/hooks/useInternetIdentity.ts`, `frontend/src/hooks/useInternetIdentity.tsx`, `frontend/src/hooks/useActor.ts`, `frontend/src/main.tsx`, or anything in `frontend/src/components/ui` (immutable paths).",
+    "Keep all user-facing content in English."
+  ],
+  "nonGoals": [
+    "Implementing or changing the shipment tracking feature (not part of this request).",
+    "Changing backend inquiry storage or submission behavior."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

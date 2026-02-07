@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.5rem;
+        /* Charcoal/white with orange accent theme */
+        --background: 0.98 0 0; /* Near white */
+        --foreground: 0.25 0.01 270; /* Deep charcoal */
+        --card: 1 0 0;
+        --card-foreground: 0.25 0.01 270;
+        --popover: 1 0 0;
+        --popover-foreground: 0.25 0.01 270;
+        --primary: 0.25 0.01 270; /* Charcoal */
+        --primary-foreground: 0.98 0 0;
+        --secondary: 0.92 0.005 270;
+        --secondary-foreground: 0.25 0.01 270;
+        --muted: 0.95 0.005 270;
+        --muted-foreground: 0.50 0.01 270;
+        --accent: 0.65 0.18 45; /* Vibrant orange */
+        --accent-foreground: 0.98 0 0;
+        --destructive: 0.577 0.245 27.325;
+        --destructive-foreground: 0.98 0 0;
+        --border: 0.88 0.005 270;
+        --input: 0.88 0.005 270;
+        --ring: 0.65 0.18 45;
+        --chart-1: 0.65 0.18 45;
+        --chart-2: 0.25 0.01 270;
+        --chart-3: 0.50 0.01 270;
+        --chart-4: 0.70 0.15 35;
+        --chart-5: 0.60 0.12 55;
+    }
+
+    .dark {
+        --background: 0.18 0.01 270; /* Dark charcoal */
+        --foreground: 0.95 0.005 270;
+        --card: 0.22 0.01 270;
+        --card-foreground: 0.95 0.005 270;
+        --popover: 0.20 0.01 270;
+        --popover-foreground: 0.95 0.005 270;
+        --primary: 0.92 0.005 270; /* Light for dark mode */
+        --primary-foreground: 0.18 0.01 270;
+        --secondary: 0.28 0.01 270;
+        --secondary-foreground: 0.95 0.005 270;
+        --muted: 0.28 0.01 270;
+        --muted-foreground: 0.65 0.01 270;
+        --accent: 0.70 0.20 45; /* Brighter orange for dark */
+        --accent-foreground: 0.98 0 0;
+        --destructive: 0.65 0.22 27;
+        --destructive-foreground: 0.98 0 0;
+        --border: 0.30 0.01 270;
+        --input: 0.30 0.01 270;
+        --ring: 0.70 0.20 45;
+        --chart-1: 0.70 0.20 45;
+        --chart-2: 0.92 0.005 270;
+        --chart-3: 0.65 0.01 270;
+        --chart-4: 0.75 0.18 35;
+        --chart-5: 0.65 0.15 55;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+@layer components {
+    .section-container {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+
+    .section-padding {
+        @apply py-16 md:py-24;
+    }
+}

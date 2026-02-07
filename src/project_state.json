@@ -1,0 +1,144 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 7,
+  "summary": "Create a website for a logistics and courier services business (ML Enterprise, Mokokchung).",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-a-responsive-marketing-website-for-the-logistics-and-courier-services-business-ml-enterprise-located-in-mokokchung-with-all-user-facing-content-in-english",
+      "title": "Create a responsive marketing website for the logistics and courier services business “ML Enterprise” located in Mokokchung, with all user-facing content in English.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-core-site-pages-sections-and-navigation-home-services-about-coverage-routes-contact-navigation-must-work-via-a-header-menu-and-a-mobile-friendly-menu",
+      "title": "Implement core site pages/sections and navigation: Home, Services, About, Coverage/Routes, Contact. Navigation must work via a header menu and a mobile-friendly menu.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-clear-service-presentation-for-ml-enterprise-including-at-minimum-courier-delivery-logistics-transport-parcel-handling-and-business-shipping-solutions-include-concise-feature-bullets-and-service-cards",
+      "title": "Add a clear service presentation for ML Enterprise including at minimum: courier/delivery, logistics/transport, parcel handling, and business shipping solutions; include concise feature bullets and service cards.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-contact-section-with-a-validated-inquiry-form-name-phone-email-message-and-business-contact-details-address-location-text-for-mokokchung-phone-email-business-hours",
+      "title": "Add a Contact section with a validated inquiry form (name, phone, email, message) and business contact details (address/location text for Mokokchung, phone, email, business hours).",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-wire-the-contact-form-to-the-backend-using-the-existing-actor-internet-identity-integration-patterns-in-the-template-without-modifying-any-immutable-frontend-paths",
+      "title": "Wire the Contact form to the backend using the existing actor/Internet Identity integration patterns in the template without modifying any immutable frontend paths.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-define-and-apply-a-coherent-visual-theme-suitable-for-a-logistics-courier-brand-avoid-blue-purple-typography-spacing-and-a-consistent-color-system-across-all-sections-e-g-charcoal-white-with-orange-accent",
+      "title": "Define and apply a coherent visual theme suitable for a logistics/courier brand (avoid blue/purple): typography, spacing, and a consistent color system across all sections (e.g., charcoal/white with orange accent).",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-hero-section-on-the-home-page-with-a-strong-headline-short-supporting-copy-and-prominent-calls-to-action-e-g-request-a-pickup-contact-us-that-scroll-navigate-to-the-contact-section",
+      "title": "Add a hero section on the Home page with a strong headline, short supporting copy, and prominent calls-to-action (e.g., “Request a Pickup”, “Contact Us”) that scroll/navigate to the Contact section.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-static-assets-generated-images-to-support-branding-and-presentation-and-render-them-in-the-ui-from-frontend-public-assets-generated-do-not-serve-images-from-the-backend",
+      "title": "Add static assets (generated images) to support branding and presentation, and render them in the UI from frontend/public/assets/generated (do not serve images from the backend).",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-coverage-routes-section-to-clearly-state-that-ml-enterprise-offers-pickup-facility-anywhere-in-india-nationwide-pickup-while-keeping-the-existing-mokokchung-primary-coverage-list",
+      "title": "Update the Coverage/Routes section to clearly state that ML Enterprise offers pickup facility anywhere in India (nationwide pickup), while keeping the existing Mokokchung primary coverage list.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-services-and-or-hero-section-copy-to-include-a-clear-claim-that-ml-enterprise-provides-nationwide-pickup-across-india-e-g-as-a-service-feature-bullet-or-supporting-line-near-the-primary-ctas",
+      "title": "Update the Services and/or Hero section copy to include a clear claim that ML Enterprise provides nationwide pickup across India (e.g., as a service feature bullet or supporting line near the primary CTAs).",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-contact-section-business-details-to-show-the-provided-ml-enterprise-address-phone-number-and-email-id-replace-the-current-placeholder-contact-info-use-the-exact-values-address-tongdentsuyong-ward-a-m-road-mokokchung-nagaland-798601-phone-9366012115-email-mlenterprisemkg-gmail-com",
+      "title": "Update the Contact section business details to show the provided ML Enterprise address, phone number, and email ID (replace the current placeholder contact info). Use the exact values:\n- Address: \"Tongdentsuyong Ward, A.M Road, Mokokchung, Nagaland 798601\"\n- Phone: \"9366012115\"\n- Email: \"mlenterprisemkg@gmail.com\"",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-site-footer-contact-details-to-match-the-provided-address-phone-number-and-email-id-replace-the-current-placeholder-values",
+      "title": "Update the site footer contact details to match the provided address, phone number, and email ID (replace the current placeholder values).",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Build a website for ML Enterprise (Mokokchung) showcasing logistics and courier services.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Persist submitted contact inquiries in the Motoko backend and expose a query method to list inquiries for later review.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Add/clarify that ML Enterprise offers pickup facility anywhere in India (nationwide pickup coverage) and reflect this in the Coverage/Routes and/or Services content.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Add a simple shipment tracking feature to the website.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Update the Contact section to display the provided business address, phone number, and email (Tongdentsuyong Ward, A.M Road, Mokokchung, Nagaland 798601; 9366012115; mlenterprisemkg@gmail.com).",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "ML Enterprise Mokokchung",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

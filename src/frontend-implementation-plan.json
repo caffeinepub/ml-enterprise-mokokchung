@@ -1,0 +1,38 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Update contact details in Contact section and footer",
+  "requirements": [
+    {
+      "id": "REQ-12",
+      "summary": "Replace placeholder Contact section business details with the provided ML Enterprise address, phone, and email while keeping Business Hours unchanged.",
+      "acceptanceCriteria": [
+        "In `frontend/src/components/site/sections/ContactSection.tsx`, the 'Location', 'Phone', and 'Email' cards display the provided address/phone/email instead of placeholders.",
+        "Business Hours remains unchanged unless explicitly provided otherwise.",
+        "All user-facing text remains in English."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/site/sections/ContactSection.tsx",
+          "operation": "modify",
+          "description": "Update the `contactInfo` entries for 'Location', 'Phone', and 'Email' to exactly:\n- Address: \"Tongdentsuyong Ward, A.M Road, Mokokchung, Nagaland 798601\"\n- Phone: \"9366012115\"\n- Email: \"mlenterprisemkg@gmail.com\"\nKeep the existing Business Hours card content unchanged and ensure all displayed text remains in English."
+        }
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "summary": "Update footer contact details to match the provided address, phone, and email without causing mobile layout overflow.",
+      "acceptanceCriteria": [
+        "In `frontend/src/components/site/SiteFooter.tsx`, the Contact list shows the provided address, phone, and email instead of the current placeholders.",
+        "Footer continues to render without layout overflow on mobile widths."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/site/SiteFooter.tsx",
+          "operation": "modify",
+          "description": "Replace the footer Contact list placeholder values with the exact provided:\n- \"Tongdentsuyong Ward, A.M Road, Mokokchung, Nagaland 798601\"\n- \"9366012115\"\n- \"mlenterprisemkg@gmail.com\"\nPreserve the existing business hours line. Add/adjust Tailwind utility classes on the contact list items (e.g., enabling wrapping like `break-words` / `whitespace-normal`) as needed to prevent overflow on narrow/mobile widths while keeping content in English."
+        }
+      ]
+    }
+  ]
+}

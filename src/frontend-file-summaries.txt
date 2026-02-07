@@ -1,0 +1,14 @@
+{
+  "frontend/src/index.css": "Global styles with OKLCH color system defining a charcoal/white theme with vibrant orange accents for light and dark modes, plus utility classes for sections.",
+  "frontend/tailwind.config.js": "Tailwind configuration extending the theme with custom fonts (Inter, Outfit), colors mapped to CSS variables, custom border radius, shadows, and animations.",
+  "frontend/src/App.tsx": "Main application component composing the complete single-page marketing site with header, hero, services, about, coverage, contact sections, and footer.",
+  "frontend/src/components/site/SiteHeader.tsx": "Responsive header with ML Enterprise branding, desktop navigation menu, and mobile sheet menu that scrolls to page sections.",
+  "frontend/src/components/site/sections/HeroSection.tsx": "Hero section featuring headline, supporting copy with nationwide pickup claim, stats, two CTA buttons scrolling to contact, and hero banner image.",
+  "frontend/src/components/site/sections/ServicesSection.tsx": "Services section displaying four service cards with icons, descriptions, and feature bullets including nationwide pickup in the Logistics & Transport card.",
+  "frontend/src/components/site/sections/AboutSection.tsx": "About section with company description and four value cards highlighting reliability, customer focus, excellence, and local expertise.",
+  "frontend/src/components/site/sections/CoverageSection.tsx": "Coverage section with nationwide pickup banner, delivery windows, service areas, and primary coverage locations across Mokokchung district.",
+  "frontend/src/components/site/sections/ContactSection.tsx": "Contact section with ML Enterprise business details (address, phone, email) displayed in cards and a validated inquiry form submitting to backend with success/error states.",
+  "frontend/src/components/site/SiteFooter.tsx": "Footer with brand info, quick links, services list, ML Enterprise contact details (address, phone, email), and attribution with caffeine.ai link.",
+  "frontend/src/hooks/useSubmitInquiry.ts": "React Query mutation hook for submitting contact inquiries to the backend actor with timestamp.",
+  "frontend/src/lib/validation/contactInquiry.ts": "Client-side validation helper for contact form fields (name, phone, email, message) with error messages."
+}

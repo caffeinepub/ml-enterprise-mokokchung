@@ -1,0 +1,49 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-07T03:18:22.993Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 2,
+    "implemented": 2,
+    "items": [
+      {
+        "id": "REQ-12",
+        "summary": "Update the Contact section business details to show the provided ML Enterprise address, phone number, and email ID (replace the current placeholder contact info). Use the exact values:\n- Address: \"Tongdentsuyong Ward, A.M Road, Mokokchung, Nagaland 798601\"\n- Phone: \"9366012115\"\n- Email: \"mlenterprisemkg@gmail.com\"",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/site/sections/ContactSection.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/site/sections/ContactSection.tsx"
+        ]
+      },
+      {
+        "id": "REQ-13",
+        "summary": "Update the site footer contact details to match the provided address, phone number, and email ID (replace the current placeholder values).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/site/SiteFooter.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/site/SiteFooter.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/components/site/SiteFooter.tsx",
+    "frontend/src/components/site/sections/ContactSection.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}
