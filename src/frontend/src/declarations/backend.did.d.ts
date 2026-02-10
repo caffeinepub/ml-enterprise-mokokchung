@@ -10,6 +10,19 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
+export interface Booking {
+  'id' : bigint,
+  'customerName' : string,
+  'created' : bigint,
+  'dropOffLocation' : string,
+  'submittedBy' : Principal,
+  'email' : string,
+  'notes' : [] | [string],
+  'packageDetails' : string,
+  'phone' : string,
+  'preferredPickupTime' : string,
+  'pickupLocation' : string,
+}
 export interface Inquiry {
   'name' : string,
   'submittedBy' : Principal,
@@ -17,9 +30,98 @@ export interface Inquiry {
   'message' : string,
   'timestamp' : bigint,
 }
+export interface LabelDetails {
+  'weight' : string,
+  'trackingNumber' : string,
+  'serviceType' : string,
+  'senderName' : string,
+  'recipientAddress' : string,
+  'recipientName' : string,
+  'dimensions' : string,
+  'senderAddress' : string,
+}
+export interface ShipmentStatus {
+  'labelDetails' : LabelDetails,
+  'status' : string,
+  'trackingNumber' : string,
+  'destination' : string,
+  'origin' : string,
+  'history' : Array<StatusHistory>,
+  'currentLocation' : string,
+  'expectedDelivery' : bigint,
+}
+export interface StatusHistory {
+  'status' : string,
+  'timestamp' : bigint,
+  'location' : string,
+}
+export interface UserProfile { 'name' : string, 'email' : string }
+export type UserRole = { 'admin' : null } |
+  { 'user' : null } |
+  { 'guest' : null };
+export interface WhatsAppQuery {
+  'courierPartner' : [] | [string],
+  'name' : string,
+  'submittedBy' : Principal,
+  'email' : string,
+  'message' : string,
+  'timestamp' : bigint,
+  'phone' : string,
+}
 export interface _SERVICE {
+  '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
+  'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
+  'createShipment' : ActorMethod<
+    [
+      string,
+      string,
+      string,
+      bigint,
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+    ],
+    undefined
+  >,
+  'getAllBookings' : ActorMethod<[], Array<Booking>>,
   'getAllInquiries' : ActorMethod<[], Array<Inquiry>>,
+  'getAllShipments' : ActorMethod<[], Array<ShipmentStatus>>,
+  'getAllWhatsAppQueries' : ActorMethod<[], Array<WhatsAppQuery>>,
+  'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
+  'getCallerUserRole' : ActorMethod<[], UserRole>,
+  'getLabelDetails' : ActorMethod<[string], [] | [LabelDetails]>,
+  'getShipmentsByStatus' : ActorMethod<[string], Array<ShipmentStatus>>,
+  'getTrackingInfo' : ActorMethod<[string], [] | [ShipmentStatus]>,
+  'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
+  'isCallerAdmin' : ActorMethod<[], boolean>,
+  'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
+  'submitBooking' : ActorMethod<
+    [
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      string,
+      [] | [string],
+      bigint,
+    ],
+    undefined
+  >,
   'submitInquiry' : ActorMethod<[string, string, string, bigint], undefined>,
+  'submitWhatsAppQuery' : ActorMethod<
+    [string, string, string, string, [] | [string], bigint],
+    undefined
+  >,
+  'updateShipmentStatus' : ActorMethod<
+    [string, string, string, bigint],
+    undefined
+  >,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];

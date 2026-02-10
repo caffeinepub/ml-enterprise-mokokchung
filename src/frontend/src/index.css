@@ -82,3 +82,50 @@
         @apply py-16 md:py-24;
     }
 }
+
+/* Print Styles */
+@media print {
+    /* Hide everything except the label */
+    body * {
+        visibility: hidden;
+    }
+
+    #shipping-label,
+    #shipping-label * {
+        visibility: visible;
+    }
+
+    #shipping-label {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 20px;
+        box-shadow: none;
+    }
+
+    /* Ensure high contrast for printing */
+    #shipping-label {
+        background: white !important;
+        color: black !important;
+    }
+
+    /* Remove page breaks inside the label */
+    #shipping-label {
+        page-break-inside: avoid;
+    }
+
+    /* Hide shadows and backgrounds for print */
+    .print\:border-4 {
+        border-width: 4px !important;
+    }
+
+    .print\:border-black {
+        border-color: black !important;
+    }
+
+    .print\:bg-gray-100 {
+        background-color: #f3f4f6 !important;
+    }
+}

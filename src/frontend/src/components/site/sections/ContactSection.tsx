@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, Loader2 } from 'lucide-react';
+import { SiWhatsapp } from 'react-icons/si';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -8,7 +9,11 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useSubmitInquiry } from '@/hooks/useSubmitInquiry';
+import { useSubmitWhatsAppQuery } from '@/hooks/useSubmitWhatsAppQuery';
 import { validateContactForm } from '@/lib/validation/contactInquiry';
+import { buildWhatsAppMessage, buildWhatsAppUrl } from '@/utils/whatsapp';
+
+const BUSINESS_PHONE = '9366012115';
 
 const contactInfo = [
   {
@@ -19,7 +24,7 @@ const contactInfo = [
   {
     icon: Phone,
     title: 'Phone',
-    content: '9366012115'
+    content: BUSINESS_PHONE
   },
   {
     icon: Mail,
@@ -41,8 +46,10 @@ export function ContactSection() {
     message: ''
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [whatsappError, setWhatsappError] = useState<string>('');
 
   const { mutate: submitInquiry, isPending, isSuccess, isError } = useSubmitInquiry();
+  const { mutate: submitWhatsAppQuery, isPending: isWhatsAppPending } = useSubmitWhatsAppQuery();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -50,6 +57,9 @@ export function ContactSection() {
     // Clear error for this field when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+    if (whatsappError) {
+      setWhatsappError('');
     }
   };
 
@@ -70,12 +80,54 @@ export function ContactSection() {
     });
   };
 
+  const handleWhatsAppClick = () => {
+    const validation = validateContactForm(formData);
+    if (!validation.isValid) {
+      setErrors(validation.errors);
+      return;
+    }
+
+    setWhatsappError('');
+
+    // Build pre-filled WhatsApp message
+    const message = buildWhatsAppMessage({
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      message: formData.message
+    });
+
+    // Submit WhatsApp query to backend
+    submitWhatsAppQuery(
+      {
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        message: formData.message,
+        timestamp: BigInt(Date.now())
+      },
+      {
+        onSuccess: () => {
+          // Open WhatsApp only after successful submission
+          const whatsappUrl = buildWhatsAppUrl(BUSINESS_PHONE, message);
+          window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        },
+        onError: (error) => {
+          console.error('WhatsApp query submission error:', error);
+          setWhatsappError('Failed to submit WhatsApp query. Please try again or contact us directly.');
+        }
+      }
+    );
+  };
+
   // Reset form after successful submission
   if (isSuccess && formData.name) {
     setTimeout(() => {
       setFormData({ name: '', phone: '', email: '', message: '' });
     }, 2000);
   }
+
+  const isFormValid = validateContactForm(formData).isValid;
 
   return (
     <section id="contact" className="section-padding">
@@ -237,20 +289,49 @@ export function ContactSection() {
                   </Alert>
                 )}
 
-                <Button
-                  type="submit"
-                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
-                  disabled={isPending}
-                >
-                  {isPending ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Sending...
-                    </>
-                  ) : (
-                    'Send Message'
-                  )}
-                </Button>
+                {whatsappError && (
+                  <Alert variant="destructive">
+                    <AlertDescription>
+                      {whatsappError}
+                    </AlertDescription>
+                  </Alert>
+                )}
+
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button
+                    type="submit"
+                    className="flex-1 bg-accent hover:bg-accent/90 text-accent-foreground"
+                    disabled={isPending}
+                  >
+                    {isPending ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      'Send Message'
+                    )}
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="flex-1 border-2 border-[#25D366] text-[#25D366] hover:bg-[#25D366]/10"
+                    onClick={handleWhatsAppClick}
+                    disabled={!isFormValid || isWhatsAppPending}
+                  >
+                    {isWhatsAppPending ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Connecting...
+                      </>
+                    ) : (
+                      <>
+                        <SiWhatsapp className="mr-2 h-4 w-4" />
+                        WhatsApp Us
+                      </>
+                    )}
+                  </Button>
+                </div>
               </form>
             </CardContent>
           </Card>

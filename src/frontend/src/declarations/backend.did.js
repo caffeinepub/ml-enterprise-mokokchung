@@ -8,6 +8,24 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
+export const UserRole = IDL.Variant({
+  'admin' : IDL.Null,
+  'user' : IDL.Null,
+  'guest' : IDL.Null,
+});
+export const Booking = IDL.Record({
+  'id' : IDL.Nat,
+  'customerName' : IDL.Text,
+  'created' : IDL.Int,
+  'dropOffLocation' : IDL.Text,
+  'submittedBy' : IDL.Principal,
+  'email' : IDL.Text,
+  'notes' : IDL.Opt(IDL.Text),
+  'packageDetails' : IDL.Text,
+  'phone' : IDL.Text,
+  'preferredPickupTime' : IDL.Text,
+  'pickupLocation' : IDL.Text,
+});
 export const Inquiry = IDL.Record({
   'name' : IDL.Text,
   'submittedBy' : IDL.Principal,
@@ -15,15 +33,138 @@ export const Inquiry = IDL.Record({
   'message' : IDL.Text,
   'timestamp' : IDL.Int,
 });
+export const LabelDetails = IDL.Record({
+  'weight' : IDL.Text,
+  'trackingNumber' : IDL.Text,
+  'serviceType' : IDL.Text,
+  'senderName' : IDL.Text,
+  'recipientAddress' : IDL.Text,
+  'recipientName' : IDL.Text,
+  'dimensions' : IDL.Text,
+  'senderAddress' : IDL.Text,
+});
+export const StatusHistory = IDL.Record({
+  'status' : IDL.Text,
+  'timestamp' : IDL.Int,
+  'location' : IDL.Text,
+});
+export const ShipmentStatus = IDL.Record({
+  'labelDetails' : LabelDetails,
+  'status' : IDL.Text,
+  'trackingNumber' : IDL.Text,
+  'destination' : IDL.Text,
+  'origin' : IDL.Text,
+  'history' : IDL.Vec(StatusHistory),
+  'currentLocation' : IDL.Text,
+  'expectedDelivery' : IDL.Int,
+});
+export const WhatsAppQuery = IDL.Record({
+  'courierPartner' : IDL.Opt(IDL.Text),
+  'name' : IDL.Text,
+  'submittedBy' : IDL.Principal,
+  'email' : IDL.Text,
+  'message' : IDL.Text,
+  'timestamp' : IDL.Int,
+  'phone' : IDL.Text,
+});
+export const UserProfile = IDL.Record({
+  'name' : IDL.Text,
+  'email' : IDL.Text,
+});
 
 export const idlService = IDL.Service({
+  '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+  'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+  'createShipment' : IDL.Func(
+      [
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Int,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+      ],
+      [],
+      [],
+    ),
+  'getAllBookings' : IDL.Func([], [IDL.Vec(Booking)], ['query']),
   'getAllInquiries' : IDL.Func([], [IDL.Vec(Inquiry)], ['query']),
+  'getAllShipments' : IDL.Func([], [IDL.Vec(ShipmentStatus)], ['query']),
+  'getAllWhatsAppQueries' : IDL.Func([], [IDL.Vec(WhatsAppQuery)], ['query']),
+  'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
+  'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+  'getLabelDetails' : IDL.Func([IDL.Text], [IDL.Opt(LabelDetails)], ['query']),
+  'getShipmentsByStatus' : IDL.Func(
+      [IDL.Text],
+      [IDL.Vec(ShipmentStatus)],
+      ['query'],
+    ),
+  'getTrackingInfo' : IDL.Func(
+      [IDL.Text],
+      [IDL.Opt(ShipmentStatus)],
+      ['query'],
+    ),
+  'getUserProfile' : IDL.Func(
+      [IDL.Principal],
+      [IDL.Opt(UserProfile)],
+      ['query'],
+    ),
+  'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+  'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+  'submitBooking' : IDL.Func(
+      [
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Opt(IDL.Text),
+        IDL.Int,
+      ],
+      [],
+      [],
+    ),
   'submitInquiry' : IDL.Func([IDL.Text, IDL.Text, IDL.Text, IDL.Int], [], []),
+  'submitWhatsAppQuery' : IDL.Func(
+      [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Opt(IDL.Text), IDL.Int],
+      [],
+      [],
+    ),
+  'updateShipmentStatus' : IDL.Func(
+      [IDL.Text, IDL.Text, IDL.Text, IDL.Int],
+      [],
+      [],
+    ),
 });
 
 export const idlInitArgs = [];
 
 export const idlFactory = ({ IDL }) => {
+  const UserRole = IDL.Variant({
+    'admin' : IDL.Null,
+    'user' : IDL.Null,
+    'guest' : IDL.Null,
+  });
+  const Booking = IDL.Record({
+    'id' : IDL.Nat,
+    'customerName' : IDL.Text,
+    'created' : IDL.Int,
+    'dropOffLocation' : IDL.Text,
+    'submittedBy' : IDL.Principal,
+    'email' : IDL.Text,
+    'notes' : IDL.Opt(IDL.Text),
+    'packageDetails' : IDL.Text,
+    'phone' : IDL.Text,
+    'preferredPickupTime' : IDL.Text,
+    'pickupLocation' : IDL.Text,
+  });
   const Inquiry = IDL.Record({
     'name' : IDL.Text,
     'submittedBy' : IDL.Principal,
@@ -31,10 +172,116 @@ export const idlFactory = ({ IDL }) => {
     'message' : IDL.Text,
     'timestamp' : IDL.Int,
   });
+  const LabelDetails = IDL.Record({
+    'weight' : IDL.Text,
+    'trackingNumber' : IDL.Text,
+    'serviceType' : IDL.Text,
+    'senderName' : IDL.Text,
+    'recipientAddress' : IDL.Text,
+    'recipientName' : IDL.Text,
+    'dimensions' : IDL.Text,
+    'senderAddress' : IDL.Text,
+  });
+  const StatusHistory = IDL.Record({
+    'status' : IDL.Text,
+    'timestamp' : IDL.Int,
+    'location' : IDL.Text,
+  });
+  const ShipmentStatus = IDL.Record({
+    'labelDetails' : LabelDetails,
+    'status' : IDL.Text,
+    'trackingNumber' : IDL.Text,
+    'destination' : IDL.Text,
+    'origin' : IDL.Text,
+    'history' : IDL.Vec(StatusHistory),
+    'currentLocation' : IDL.Text,
+    'expectedDelivery' : IDL.Int,
+  });
+  const WhatsAppQuery = IDL.Record({
+    'courierPartner' : IDL.Opt(IDL.Text),
+    'name' : IDL.Text,
+    'submittedBy' : IDL.Principal,
+    'email' : IDL.Text,
+    'message' : IDL.Text,
+    'timestamp' : IDL.Int,
+    'phone' : IDL.Text,
+  });
+  const UserProfile = IDL.Record({ 'name' : IDL.Text, 'email' : IDL.Text });
   
   return IDL.Service({
+    '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+    'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+    'createShipment' : IDL.Func(
+        [
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Int,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+        ],
+        [],
+        [],
+      ),
+    'getAllBookings' : IDL.Func([], [IDL.Vec(Booking)], ['query']),
     'getAllInquiries' : IDL.Func([], [IDL.Vec(Inquiry)], ['query']),
+    'getAllShipments' : IDL.Func([], [IDL.Vec(ShipmentStatus)], ['query']),
+    'getAllWhatsAppQueries' : IDL.Func([], [IDL.Vec(WhatsAppQuery)], ['query']),
+    'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
+    'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
+    'getLabelDetails' : IDL.Func(
+        [IDL.Text],
+        [IDL.Opt(LabelDetails)],
+        ['query'],
+      ),
+    'getShipmentsByStatus' : IDL.Func(
+        [IDL.Text],
+        [IDL.Vec(ShipmentStatus)],
+        ['query'],
+      ),
+    'getTrackingInfo' : IDL.Func(
+        [IDL.Text],
+        [IDL.Opt(ShipmentStatus)],
+        ['query'],
+      ),
+    'getUserProfile' : IDL.Func(
+        [IDL.Principal],
+        [IDL.Opt(UserProfile)],
+        ['query'],
+      ),
+    'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+    'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+    'submitBooking' : IDL.Func(
+        [
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Opt(IDL.Text),
+          IDL.Int,
+        ],
+        [],
+        [],
+      ),
     'submitInquiry' : IDL.Func([IDL.Text, IDL.Text, IDL.Text, IDL.Int], [], []),
+    'submitWhatsAppQuery' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Opt(IDL.Text), IDL.Int],
+        [],
+        [],
+      ),
+    'updateShipmentStatus' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Int],
+        [],
+        [],
+      ),
   });
 };
 

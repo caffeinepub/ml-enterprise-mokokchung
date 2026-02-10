@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
@@ -8,6 +8,11 @@ const navLinks = [
   { label: 'Services', href: '#services' },
   { label: 'About', href: '#about' },
   { label: 'Coverage', href: '#coverage' },
+  { label: 'Courier Partners', href: '#courier-partners' },
+  { label: 'Gallery', href: '#gallery' },
+  { label: 'Tracking', href: '#tracking' },
+  { label: 'Label Print', href: '#label-print' },
+  { label: 'Booking', href: '#booking' },
   { label: 'Contact', href: '#contact' }
 ];
 
@@ -26,16 +31,11 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="section-container">
         <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
+          {/* Brand */}
           <button
             onClick={() => scrollToSection('#home')}
-            className="flex items-center space-x-3 hover:opacity-80 transition-opacity"
+            className="flex items-center hover:opacity-80 transition-opacity"
           >
-            <img
-              src="/assets/generated/ml-enterprise-logo.dim_512x512.png"
-              alt="ML Enterprise Logo"
-              className="h-10 w-10 object-contain"
-            />
             <div className="flex flex-col">
               <span className="font-display font-bold text-lg leading-tight">ML Enterprise</span>
               <span className="text-xs text-muted-foreground">Mokokchung</span>
@@ -55,10 +55,10 @@ export function SiteHeader() {
               </Button>
             ))}
             <Button
-              onClick={() => scrollToSection('#contact')}
+              onClick={() => scrollToSection('#booking')}
               className="ml-4 bg-accent hover:bg-accent/90 text-accent-foreground"
             >
-              Get Quote
+              Book Now
             </Button>
           </nav>
 
@@ -82,10 +82,10 @@ export function SiteHeader() {
                   </button>
                 ))}
                 <Button
-                  onClick={() => scrollToSection('#contact')}
+                  onClick={() => scrollToSection('#booking')}
                   className="mt-4 bg-accent hover:bg-accent/90 text-accent-foreground"
                 >
-                  Get Quote
+                  Book Now
                 </Button>
               </nav>
             </SheetContent>

@@ -2,18 +2,80 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-add-the-uploaded-logo-image-logo-2-jpeg-to-the-frontend-as-optimized-static-assets-under-frontend-public-assets-generated-ensuring-the-files-exist-at-the-exact-paths-already-referenced-by-the-app",
-      "featureTitle": "Add the uploaded logo image (LOGO-2.jpeg) to the frontend as optimized static assets under frontend/public/assets/generated, ensuring the files exist at the exact paths already referenced by the app.",
-      "files": [],
+      "featureId": "feature-add-a-new-gallery-section-to-the-single-page-site-that-displays-the-user-uploaded-images-in-a-responsive-grid-including-a-section-heading-and-short-descriptive-text-in-english",
+      "featureTitle": "Add a new “Gallery” section to the single-page site that displays the user-uploaded images in a responsive grid, including a section heading and short descriptive text in English.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/site/sections/GallerySection.tsx"
+      ],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
       ],
       "testIds": [
         "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-the-uploaded-image-image-1-jpg-as-a-static-frontend-asset-and-render-it-in-the-gallery-section-with-an-english-alt-attribute",
+      "featureTitle": "Add the uploaded image (image-1.jpg) as a static frontend asset and render it in the Gallery section with an English alt attribute.",
+      "files": [
+        "frontend/src/components/site/sections/GallerySection.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-an-image-preview-interaction-in-the-gallery-section-so-that-clicking-a-thumbnail-opens-a-larger-preview-modal-lightbox-with-the-image-and-accessible-controls-to-close",
+      "featureTitle": "Implement an image preview interaction in the Gallery section so that clicking a thumbnail opens a larger preview (modal/lightbox) with the image and accessible controls to close.",
+      "files": [
+        "frontend/src/components/site/gallery/GalleryLightbox.tsx",
+        "frontend/src/components/site/sections/GallerySection.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-gallery-to-the-site-navigation-so-users-can-smoothly-scroll-to-the-gallery-section-from-both-desktop-and-mobile-menus",
+      "featureTitle": "Add “Gallery” to the site navigation so users can smoothly scroll to the Gallery section from both desktop and mobile menus.",
+      "files": [
+        "frontend/src/components/site/SiteHeader.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
       ],
       "confidence": "high"
     }

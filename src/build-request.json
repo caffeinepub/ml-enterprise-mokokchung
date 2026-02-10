@@ -1,86 +1,89 @@
 {
   "kind": "build_request",
-  "title": "Re-add ML Enterprise logo assets and restore header/footer + favicon branding",
+  "title": "Add Gallery pictures section to the site",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Add the uploaded logo image (LOGO-2.jpeg) to the frontend as optimized static assets under frontend/public/assets/generated, ensuring the files exist at the exact paths already referenced by the app.",
+      "text": "Add a new “Gallery” section to the single-page site that displays the user-uploaded images in a responsive grid, including a section heading and short descriptive text in English.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-3"
+          "msg-4"
         ],
         "quotes": [
-          "readd logo"
+          "ADD GALLERY PICTURES"
         ]
       },
       "acceptanceCriteria": [
-        "The following files exist in the deployed build at these exact public paths: /assets/generated/ml-enterprise-logo.dim_512x512.png, /assets/generated/ml-enterprise-logo.dim_128x128.png, /assets/generated/ml-enterprise-favicon.dim_32x32.png",
-        "The generated logo assets have a transparent background and appear as a crisp black wordmark on all standard displays"
+        "A new section exists with id=\"gallery\" and is rendered in the main page flow.",
+        "The section displays the available gallery images in a responsive grid (e.g., 1 column on mobile, 2+ columns on larger screens).",
+        "All user-facing text in the section is in English."
       ]
     },
     {
       "id": "REQ-2",
-      "text": "Ensure the site header and footer display the logo image using the existing references to /assets/generated/ml-enterprise-logo.dim_512x512.png.",
+      "text": "Add the uploaded image (image-1.jpg) as a static frontend asset and render it in the Gallery section with an English alt attribute.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-3"
+          "msg-4"
         ],
         "quotes": [
-          "readd logo"
+          "ADD GALLERY PICTURES"
         ]
       },
       "acceptanceCriteria": [
-        "The logo is visible in the header (top-left) and footer brand block with no broken image icon",
-        "The logo image loads successfully (HTTP 200) from /assets/generated/ml-enterprise-logo.dim_512x512.png in the deployed build"
+        "The file image-1.jpg is included as a static asset under frontend/public/assets (or a subfolder) and loads successfully in production.",
+        "The Gallery section renders image-1.jpg and the <img> has a descriptive English alt attribute."
       ]
     },
     {
       "id": "REQ-3",
-      "text": "Ensure the favicon loads correctly using the existing references in frontend/index.html to /assets/generated/ml-enterprise-favicon.dim_32x32.png.",
+      "text": "Implement an image preview interaction in the Gallery section so that clicking a thumbnail opens a larger preview (modal/lightbox) with the image and accessible controls to close.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-3"
+          "msg-4"
         ],
         "quotes": [
-          "readd logo"
+          "ADD GALLERY PICTURES"
         ]
       },
       "acceptanceCriteria": [
-        "Browser tab shows the favicon when loading the app",
-        "/assets/generated/ml-enterprise-favicon.dim_32x32.png is present and returns HTTP 200 in the deployed build"
+        "Clicking a gallery thumbnail opens a modal/lightbox with a larger version of the same image.",
+        "The modal can be closed via an explicit close control and via Escape key.",
+        "Focus management and aria attributes are present/appropriate per the UI component used (e.g., shadcn Dialog)."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Add “Gallery” to the site navigation so users can smoothly scroll to the Gallery section from both desktop and mobile menus.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "ADD GALLERY PICTURES"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The header navigation includes a “Gallery” link pointing to #gallery.",
+        "Clicking “Gallery” smoothly scrolls to the Gallery section on both desktop and mobile navigation."
       ]
     }
   ],
   "constraints": [
-    "Do not modify any files under frontend/src/components/ui (read-only UI components).",
-    "Do not modify frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx (immutable paths).",
-    "Keep backend as a single Motoko actor; no backend changes are required for this request."
+    "Do not edit files under frontend/src/components/ui (compose existing UI components instead).",
+    "Do not edit frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, or frontend/src/main.tsx."
   ],
   "nonGoals": [
-    "Changing site copy, navigation, or section structure beyond what is necessary to restore the logo display.",
-    "Adding new authentication providers or third-party integrations.",
-    "Changing the backend inquiry feature or data model."
+    "No backend/canister changes or persistence for gallery images (static assets only).",
+    "No user-upload flow for adding/removing images via the UI."
   ],
   "imageRequirements": {
-    "required": [
-      "Square black wordmark logo on transparent background (ml-enterprise-logo.dim_512x512.png)",
-      "Square black wordmark logo on transparent background (ml-enterprise-logo.dim_128x128.png)",
-      "Simplified black logo mark favicon (ml-enterprise-favicon.dim_32x32.png)"
-    ],
+    "required": [],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }

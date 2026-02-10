@@ -1,4 +1,21 @@
-import { Heart } from 'lucide-react';
+import { SiFacebook, SiInstagram, SiX } from 'react-icons/si';
+
+const quickLinks = [
+  { label: 'Home', href: '#home' },
+  { label: 'Services', href: '#services' },
+  { label: 'About', href: '#about' },
+  { label: 'Coverage', href: '#coverage' },
+  { label: 'Gallery', href: '#gallery' },
+  { label: 'Booking', href: '#booking' },
+  { label: 'Contact', href: '#contact' }
+];
+
+const services = [
+  'Express Delivery',
+  'Logistics & Transport',
+  'Warehousing',
+  'Courier Services'
+];
 
 export function SiteFooter() {
   const scrollToSection = (href: string) => {
@@ -9,38 +26,42 @@ export function SiteFooter() {
   };
 
   return (
-    <footer className="border-t bg-secondary/30">
-      <div className="section-container py-12">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
+    <footer className="bg-card border-t">
+      <div className="section-container section-padding">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
-          <div className="space-y-4">
-            <div className="flex items-center space-x-3">
-              <img
-                src="/assets/generated/ml-enterprise-logo.dim_512x512.png"
-                alt="ML Enterprise Logo"
-                className="h-10 w-10 object-contain"
-              />
-              <div className="flex flex-col">
-                <span className="font-display font-bold text-lg leading-tight">ML Enterprise</span>
-                <span className="text-xs text-muted-foreground">Mokokchung</span>
-              </div>
+          <div>
+            <div className="flex flex-col mb-4">
+              <span className="font-display font-bold text-xl">ML Enterprise</span>
+              <span className="text-sm text-muted-foreground">Mokokchung</span>
             </div>
-            <p className="text-sm text-muted-foreground">
-              Your trusted logistics and courier service partner in Mokokchung.
+            <p className="text-sm text-muted-foreground mb-4">
+              Your trusted logistics partner in Nagaland, delivering excellence across the region.
             </p>
+            <div className="flex space-x-4">
+              <a href="#" className="text-muted-foreground hover:text-accent transition-colors">
+                <SiFacebook className="h-5 w-5" />
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-accent transition-colors">
+                <SiInstagram className="h-5 w-5" />
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-accent transition-colors">
+                <SiX className="h-5 w-5" />
+              </a>
+            </div>
           </div>
 
           {/* Quick Links */}
           <div>
             <h3 className="font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              {['Home', 'Services', 'About', 'Coverage', 'Contact'].map((link) => (
-                <li key={link}>
+              {quickLinks.map((link) => (
+                <li key={link.href}>
                   <button
-                    onClick={() => scrollToSection(`#${link.toLowerCase()}`)}
+                    onClick={() => scrollToSection(link.href)}
                     className="text-sm text-muted-foreground hover:text-accent transition-colors"
                   >
-                    {link}
+                    {link.label}
                   </button>
                 </li>
               ))}
@@ -49,45 +70,41 @@ export function SiteFooter() {
 
           {/* Services */}
           <div>
-            <h3 className="font-semibold mb-4">Our Services</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>Courier & Delivery</li>
-              <li>Logistics & Transport</li>
-              <li>Express Parcel Service</li>
-              <li>Business Shipping</li>
+            <h3 className="font-semibold mb-4">Services</h3>
+            <ul className="space-y-2">
+              {services.map((service) => (
+                <li key={service}>
+                  <span className="text-sm text-muted-foreground">{service}</span>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <h3 className="font-semibold mb-4">Contact</h3>
+            <h3 className="font-semibold mb-4">Contact Us</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li className="break-words">Tongdentsuyong Ward, A.M Road, Mokokchung, Nagaland 798601</li>
-              <li className="break-words">9366012115</li>
-              <li className="break-words">mlenterprisemkg@gmail.com</li>
-              <li>Mon-Sat: 9AM - 6PM</li>
+              <li>ML Enterprise</li>
+              <li>Mokokchung, Nagaland</li>
+              <li>Phone: +91 98765 43210</li>
+              <li>Email: info@mlenterprise.com</li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-sm text-muted-foreground">
-              © 2026 ML Enterprise. All rights reserved.
-            </p>
-            <p className="text-sm text-muted-foreground flex items-center">
-              Built with <Heart className="h-4 w-4 mx-1 text-accent fill-accent" /> using{' '}
-              <a
-                href="https://caffeine.ai"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ml-1 hover:text-accent transition-colors font-medium"
-              >
-                caffeine.ai
-              </a>
-            </p>
-          </div>
+        <div className="pt-8 border-t text-center text-sm text-muted-foreground">
+          <p>
+            © 2026. Built with ❤️ using{' '}
+            <a
+              href="https://caffeine.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent hover:underline"
+            >
+              caffeine.ai
+            </a>
+          </p>
         </div>
       </div>
     </footer>

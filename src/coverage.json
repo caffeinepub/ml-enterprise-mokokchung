@@ -1,58 +1,76 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-07T04:04:49.781Z",
+  "generatedAt": "2026-02-07T06:37:21.525Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 3,
-    "implemented": 1,
+    "total": 4,
+    "implemented": 4,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Add the uploaded logo image (LOGO-2.jpeg) to the frontend as optimized static assets under frontend/public/assets/generated, ensuring the files exist at the exact paths already referenced by the app.",
+        "summary": "Add a new “Gallery” section to the single-page site that displays the user-uploaded images in a responsive grid, including a section heading and short descriptive text in English.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/public/assets/generated/ml-enterprise-logo.dim_512x512.png",
-          "frontend/public/assets/generated/ml-enterprise-logo.dim_128x128.png",
-          "frontend/public/assets/generated/ml-enterprise-favicon.dim_32x32.png"
+          "frontend/src/components/site/sections/GallerySection.tsx",
+          "frontend/src/App.tsx"
         ],
         "matchedFiles": [
-          "frontend/public/assets/generated/ml-enterprise-logo.dim_512x512.png",
-          "frontend/public/assets/generated/ml-enterprise-logo.dim_128x128.png",
-          "frontend/public/assets/generated/ml-enterprise-favicon.dim_32x32.png"
+          "frontend/src/components/site/sections/GallerySection.tsx",
+          "frontend/src/App.tsx"
         ]
       },
       {
         "id": "REQ-2",
-        "summary": "Ensure the site header and footer display the logo image using the existing references to /assets/generated/ml-enterprise-logo.dim_512x512.png.",
-        "status": "missing",
+        "summary": "Add the uploaded image (image-1.jpg) as a static frontend asset and render it in the Gallery section with an English alt attribute.",
+        "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/site/SiteHeader.tsx",
-          "frontend/src/components/site/SiteFooter.tsx"
+          "frontend/public/assets/gallery/image-1.jpg",
+          "frontend/src/components/site/sections/GallerySection.tsx"
         ],
-        "matchedFiles": []
+        "matchedFiles": [
+          "frontend/src/components/site/sections/GallerySection.tsx"
+        ]
       },
       {
         "id": "REQ-3",
-        "summary": "Ensure the favicon loads correctly using the existing references in frontend/index.html to /assets/generated/ml-enterprise-favicon.dim_32x32.png.",
-        "status": "missing",
+        "summary": "Implement an image preview interaction in the Gallery section so that clicking a thumbnail opens a larger preview (modal/lightbox) with the image and accessible controls to close.",
+        "status": "implemented",
         "plannedFiles": [
-          "frontend/index.html"
+          "frontend/src/components/site/gallery/GalleryLightbox.tsx",
+          "frontend/src/components/site/sections/GallerySection.tsx"
         ],
-        "matchedFiles": []
+        "matchedFiles": [
+          "frontend/src/components/site/gallery/GalleryLightbox.tsx",
+          "frontend/src/components/site/sections/GallerySection.tsx"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Add “Gallery” to the site navigation so users can smoothly scroll to the Gallery section from both desktop and mobile menus.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/site/SiteHeader.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/site/SiteHeader.tsx"
+        ]
       }
     ]
   },
   "changedFiles": [
     "build-request.json",
     "feature_evidence.json",
+    "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/public/assets/generated/ml-enterprise-favicon.dim_32x32.png",
-    "frontend/public/assets/generated/ml-enterprise-logo.dim_128x128.png",
-    "frontend/public/assets/generated/ml-enterprise-logo.dim_512x512.png",
+    "frontend/src/App.tsx",
+    "frontend/src/components/site/SiteFooter.tsx",
+    "frontend/src/components/site/SiteHeader.tsx",
+    "frontend/src/components/site/gallery/GalleryLightbox.tsx",
+    "frontend/src/components/site/sections/GallerySection.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",
