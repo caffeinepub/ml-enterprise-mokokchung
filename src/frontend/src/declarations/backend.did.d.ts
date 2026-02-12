@@ -12,14 +12,13 @@ import type { Principal } from '@icp-sdk/core/principal';
 
 export interface Booking {
   'id' : bigint,
-  'customerName' : string,
   'created' : bigint,
   'dropOffLocation' : string,
+  'recipient' : Person,
   'submittedBy' : Principal,
-  'email' : string,
+  'sender' : Person,
   'notes' : [] | [string],
   'packageDetails' : string,
-  'phone' : string,
   'preferredPickupTime' : string,
   'pickupLocation' : string,
 }
@@ -39,6 +38,12 @@ export interface LabelDetails {
   'recipientName' : string,
   'dimensions' : string,
   'senderAddress' : string,
+}
+export interface Person {
+  'name' : string,
+  'email' : string,
+  'address' : string,
+  'phone' : string,
 }
 export interface ShipmentStatus {
   'labelDetails' : LabelDetails,
@@ -100,17 +105,7 @@ export interface _SERVICE {
   'isCallerAdmin' : ActorMethod<[], boolean>,
   'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
   'submitBooking' : ActorMethod<
-    [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      [] | [string],
-      bigint,
-    ],
+    [Person, Person, string, string, string, string, [] | [string], bigint],
     undefined
   >,
   'submitInquiry' : ActorMethod<[string, string, string, bigint], undefined>,

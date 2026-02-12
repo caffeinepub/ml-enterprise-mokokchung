@@ -50,16 +50,21 @@ export interface Inquiry {
 }
 export interface Booking {
     id: bigint;
-    customerName: string;
     created: bigint;
     dropOffLocation: string;
+    recipient: Person;
     submittedBy: Principal;
-    email: string;
+    sender: Person;
     notes?: string;
     packageDetails: string;
-    phone: string;
     preferredPickupTime: string;
     pickupLocation: string;
+}
+export interface Person {
+    name: string;
+    email: string;
+    address: string;
+    phone: string;
 }
 export interface UserProfile {
     name: string;
@@ -85,7 +90,7 @@ export interface backendInterface {
     getUserProfile(user: Principal): Promise<UserProfile | null>;
     isCallerAdmin(): Promise<boolean>;
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
-    submitBooking(customerName: string, phone: string, email: string, pickupLocation: string, dropOffLocation: string, packageDetails: string, preferredPickupTime: string, notes: string | null, created: bigint): Promise<void>;
+    submitBooking(sender: Person, recipient: Person, packageDetails: string, pickupLocation: string, dropOffLocation: string, preferredPickupTime: string, notes: string | null, created: bigint): Promise<void>;
     submitInquiry(name: string, email: string, message: string, timestamp: bigint): Promise<void>;
     submitWhatsAppQuery(name: string, phone: string, email: string, message: string, courierPartner: string | null, timestamp: bigint): Promise<void>;
     updateShipmentStatus(trackingNumber: string, newStatus: string, location: string, timestamp: bigint): Promise<void>;

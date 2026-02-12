@@ -13,16 +13,21 @@ export const UserRole = IDL.Variant({
   'user' : IDL.Null,
   'guest' : IDL.Null,
 });
+export const Person = IDL.Record({
+  'name' : IDL.Text,
+  'email' : IDL.Text,
+  'address' : IDL.Text,
+  'phone' : IDL.Text,
+});
 export const Booking = IDL.Record({
   'id' : IDL.Nat,
-  'customerName' : IDL.Text,
   'created' : IDL.Int,
   'dropOffLocation' : IDL.Text,
+  'recipient' : Person,
   'submittedBy' : IDL.Principal,
-  'email' : IDL.Text,
+  'sender' : Person,
   'notes' : IDL.Opt(IDL.Text),
   'packageDetails' : IDL.Text,
-  'phone' : IDL.Text,
   'preferredPickupTime' : IDL.Text,
   'pickupLocation' : IDL.Text,
 });
@@ -118,9 +123,8 @@ export const idlService = IDL.Service({
   'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
   'submitBooking' : IDL.Func(
       [
-        IDL.Text,
-        IDL.Text,
-        IDL.Text,
+        Person,
+        Person,
         IDL.Text,
         IDL.Text,
         IDL.Text,
@@ -152,16 +156,21 @@ export const idlFactory = ({ IDL }) => {
     'user' : IDL.Null,
     'guest' : IDL.Null,
   });
+  const Person = IDL.Record({
+    'name' : IDL.Text,
+    'email' : IDL.Text,
+    'address' : IDL.Text,
+    'phone' : IDL.Text,
+  });
   const Booking = IDL.Record({
     'id' : IDL.Nat,
-    'customerName' : IDL.Text,
     'created' : IDL.Int,
     'dropOffLocation' : IDL.Text,
+    'recipient' : Person,
     'submittedBy' : IDL.Principal,
-    'email' : IDL.Text,
+    'sender' : Person,
     'notes' : IDL.Opt(IDL.Text),
     'packageDetails' : IDL.Text,
-    'phone' : IDL.Text,
     'preferredPickupTime' : IDL.Text,
     'pickupLocation' : IDL.Text,
   });
@@ -258,9 +267,8 @@ export const idlFactory = ({ IDL }) => {
     'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
     'submitBooking' : IDL.Func(
         [
-          IDL.Text,
-          IDL.Text,
-          IDL.Text,
+          Person,
+          Person,
           IDL.Text,
           IDL.Text,
           IDL.Text,

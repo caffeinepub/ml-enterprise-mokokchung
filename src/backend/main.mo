@@ -66,14 +66,20 @@ actor {
     timestamp : Int;
   };
 
-  type Booking = {
-    id : Nat;
-    customerName : Text;
-    phone : Text;
+  public type Person = {
+    name : Text;
     email : Text;
+    phone : Text;
+    address : Text;
+  };
+
+  public type Booking = {
+    id : Nat;
+    sender : Person;
+    recipient : Person;
+    packageDetails : Text;
     pickupLocation : Text;
     dropOffLocation : Text;
-    packageDetails : Text;
     preferredPickupTime : Text;
     notes : ?Text;
     created : Int;
@@ -131,8 +137,6 @@ actor {
   };
 
   // WhatsApp Query Management
-  // Public endpoint - accessible to all users including guests (anonymous principals)
-  // This allows website visitors to submit WhatsApp click-to-chat leads without authentication
   public shared ({ caller }) func submitWhatsAppQuery(
     name : Text,
     phone : Text,
@@ -141,7 +145,9 @@ actor {
     courierPartner : ?Text,
     timestamp : Int,
   ) : async () {
-    // No authorization check - public endpoint for lead generation
+    if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
+      Runtime.trap("Unauthorized: Only users can submit WhatsApp queries");
+    };
     let whatsAppQuery : WhatsAppQuery = {
       name;
       phone;
@@ -161,7 +167,7 @@ actor {
     whatsAppQueries.toArray();
   };
 
-  // Tracking Information (Public - no auth required)
+  // Tracking Information
   public query ({ caller }) func getTrackingInfo(trackingNumber : Text) : async ?ShipmentStatus {
     shipments.get(trackingNumber);
   };
@@ -173,7 +179,7 @@ actor {
     };
   };
 
-  // Shipment Management (Admin only)
+  // Shipment Management (Admin Only)
   public shared ({ caller }) func updateShipmentStatus(
     trackingNumber : Text,
     newStatus : Text,
@@ -288,27 +294,27 @@ actor {
     ).values().toArray();
   };
 
-  // Customer Bookings - New Section
-
+  // Updated Customer Bookings (with Sender & Receiver Details)
   public shared ({ caller }) func submitBooking(
-    customerName : Text,
-    phone : Text,
-    email : Text,
+    sender : Person,
+    recipient : Person,
+    packageDetails : Text,
     pickupLocation : Text,
     dropOffLocation : Text,
-    packageDetails : Text,
     preferredPickupTime : Text,
     notes : ?Text,
     created : Int,
   ) : async () {
+    if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
+      Runtime.trap("Unauthorized: Only users can submit bookings");
+    };
     let booking : Booking = {
       id = bookings.size();
-      customerName;
-      phone;
-      email;
+      sender;
+      recipient;
+      packageDetails;
       pickupLocation;
       dropOffLocation;
-      packageDetails;
       preferredPickupTime;
       notes;
       created;

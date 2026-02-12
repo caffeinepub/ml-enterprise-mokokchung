@@ -1,89 +1,39 @@
 {
   "kind": "build_request",
-  "title": "Add Gallery pictures section to the site",
+  "title": "Add a favicon file to the frontend",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Add a new “Gallery” section to the single-page site that displays the user-uploaded images in a responsive grid, including a section heading and short descriptive text in English.",
+      "text": "Add favicon static asset(s) to the frontend and reference them from the HTML entry point so browsers display the site icon.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-3"
         ],
         "quotes": [
-          "ADD GALLERY PICTURES"
+          "ADD FILE"
         ]
       },
       "acceptanceCriteria": [
-        "A new section exists with id=\"gallery\" and is rendered in the main page flow.",
-        "The section displays the available gallery images in a responsive grid (e.g., 1 column on mobile, 2+ columns on larger screens).",
-        "All user-facing text in the section is in English."
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "text": "Add the uploaded image (image-1.jpg) as a static frontend asset and render it in the Gallery section with an English alt attribute.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "ADD GALLERY PICTURES"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The file image-1.jpg is included as a static asset under frontend/public/assets (or a subfolder) and loads successfully in production.",
-        "The Gallery section renders image-1.jpg and the <img> has a descriptive English alt attribute."
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "text": "Implement an image preview interaction in the Gallery section so that clicking a thumbnail opens a larger preview (modal/lightbox) with the image and accessible controls to close.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "ADD GALLERY PICTURES"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Clicking a gallery thumbnail opens a modal/lightbox with a larger version of the same image.",
-        "The modal can be closed via an explicit close control and via Escape key.",
-        "Focus management and aria attributes are present/appropriate per the UI component used (e.g., shadcn Dialog)."
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "text": "Add “Gallery” to the site navigation so users can smoothly scroll to the Gallery section from both desktop and mobile menus.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-4"
-        ],
-        "quotes": [
-          "ADD GALLERY PICTURES"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The header navigation includes a “Gallery” link pointing to #gallery.",
-        "Clicking “Gallery” smoothly scrolls to the Gallery section on both desktop and mobile navigation."
+        "A favicon file exists under frontend/public (for example: frontend/public/favicon.svg and/or frontend/public/favicon.ico).",
+        "frontend/index.html includes appropriate <link rel=\"icon\" ...> tag(s) referencing the new favicon file(s).",
+        "When running the app in a browser, the tab icon shows the new favicon (no missing favicon 404 in devtools network panel)."
       ]
     }
   ],
   "constraints": [
-    "Do not edit files under frontend/src/components/ui (compose existing UI components instead).",
-    "Do not edit frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, or frontend/src/main.tsx."
+    "Do not modify files under frontend/src/components/ui or any frontend immutablePaths listed in SYSTEM_CONTEXT.",
+    "Treat favicon assets as static files served from frontend/public (do not route image bytes through the backend)."
   ],
   "nonGoals": [
-    "No backend/canister changes or persistence for gallery images (static assets only).",
-    "No user-upload flow for adding/removing images via the UI."
+    "Implementing PWA manifest, apple-touch-icon, or full cross-platform icon set unless explicitly requested.",
+    "Changing any booking/sender/receiver functionality."
   ],
   "imageRequirements": {
-    "required": [],
+    "required": [
+      "Simple flat monogram logo with the letters \"ML\" in a circular badge, charcoal and orange, centered (favicon-ml-badge.dim_512x512.png)"
+    ],
     "edits": []
   }
 }

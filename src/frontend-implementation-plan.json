@@ -1,82 +1,26 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Add Gallery section with static images and lightbox preview",
+  "title": "Add favicon asset and wire it in HTML entry point",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Add a new Gallery section to the single-page site with an English heading/description and a responsive image grid.",
+      "summary": "Add a favicon static asset under frontend/public and reference it from the HTML entry point so browsers display the site icon.",
       "acceptanceCriteria": [
-        "A new section exists with id=\"gallery\" and is rendered in the main page flow.",
-        "The section displays the available gallery images in a responsive grid (e.g., 1 column on mobile, 2+ columns on larger screens).",
-        "All user-facing text in the section is in English."
+        "A favicon file exists under frontend/public (for example: frontend/public/favicon.svg and/or frontend/public/favicon.ico).",
+        "frontend/index.html includes appropriate <link rel=\"icon\" ...> tag(s) referencing the new favicon file(s).",
+        "When running the app in a browser, the tab icon shows the new favicon (no missing favicon 404 in devtools network panel)."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/site/sections/GallerySection.tsx",
+          "path": "frontend/public/assets/generated/favicon-ml-badge.dim_512x512.png",
           "operation": "create",
-          "description": "Create the Gallery section component with id=\"gallery\", an English heading + short descriptive text, and a responsive Tailwind grid layout for thumbnails."
+          "description": "Add the generated favicon image asset (Simple flat monogram logo \"ML\" in a circular badge) as a static file to be served directly from frontend/public. This must be the exact file path/name required by imageRequirements."
         },
         {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/index.html",
           "operation": "modify",
-          "description": "Render the new GallerySection in the existing single-page main flow (ensure it is not orphaned and appears among the other sections)."
-        }
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "summary": "Add image-1.jpg as a static asset and render it in the Gallery with an English alt attribute.",
-      "acceptanceCriteria": [
-        "The file image-1.jpg is included as a static asset under frontend/public/assets (or a subfolder) and loads successfully in production.",
-        "The Gallery section renders image-1.jpg and the <img> has a descriptive English alt attribute."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/public/assets/gallery/image-1.jpg",
-          "operation": "create",
-          "description": "Add the static image asset at frontend/public/assets/gallery/image-1.jpg so it is served in production builds."
-        },
-        {
-          "path": "frontend/src/components/site/sections/GallerySection.tsx",
-          "operation": "modify",
-          "description": "Render the thumbnail using the static asset /assets/gallery/image-1.jpg and provide a descriptive English alt attribute."
-        }
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "summary": "Implement a lightbox/modal preview so clicking a gallery thumbnail opens a larger preview with accessible close controls.",
-      "acceptanceCriteria": [
-        "Clicking a gallery thumbnail opens a modal/lightbox with a larger version of the same image.",
-        "The modal can be closed via an explicit close control and via Escape key.",
-        "Focus management and aria attributes are present/appropriate per the UI component used (e.g., shadcn Dialog)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/site/gallery/GalleryLightbox.tsx",
-          "operation": "create",
-          "description": "Create a lightweight, accessible modal/lightbox component (e.g., using the native HTML <dialog> element or an existing project modal component) that supports Escape-to-close, a visible close button, and appropriate aria labeling."
-        },
-        {
-          "path": "frontend/src/components/site/sections/GallerySection.tsx",
-          "operation": "modify",
-          "description": "Wire thumbnail click handling to open GalleryLightbox with the selected image, ensuring focus behavior is reasonable and close actions (button + Escape) work."
-        }
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "summary": "Add Gallery to the site navigation so users can smoothly scroll to the Gallery section from desktop and mobile menus.",
-      "acceptanceCriteria": [
-        "The header navigation includes a “Gallery” link pointing to #gallery.",
-        "Clicking “Gallery” smoothly scrolls to the Gallery section on both desktop and mobile navigation."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/site/SiteHeader.tsx",
-          "operation": "modify",
-          "description": "Add a “Gallery” item to navLinks with href \"#gallery\" so both desktop and mobile menus can smooth-scroll to the new Gallery section."
+          "description": "Add appropriate favicon <link rel=\"icon\" ...> tag(s) in the <head> referencing the static favicon image at frontend/public/assets/generated/favicon-ml-badge.dim_512x512.png so the browser loads it without 404s."
         }
       ]
     }

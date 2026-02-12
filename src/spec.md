@@ -1,12 +1,10 @@
 # Specification
 
 ## Summary
-**Goal:** Add a new Gallery section to the single-page site to showcase provided images with a preview experience.
+**Goal:** Add a favicon static asset to the frontend so browsers display the site icon.
 
 **Planned changes:**
-- Add a new page section with id="gallery" containing an English heading and short descriptive text.
-- Render the uploaded image (image-1.jpg) as a static frontend asset in a responsive grid layout with an English alt attribute.
-- Add a click-to-preview interaction (modal/lightbox) for gallery thumbnails with accessible close controls (close button and Escape key).
-- Add “Gallery” to the site navigation (desktop and mobile) linking to #gallery with smooth scrolling.
+- Add favicon asset file(s) under `frontend/public`.
+- Update `frontend/index.html` to reference the favicon via appropriate `<link rel="icon" ...>` tag(s).
 
-**User-visible outcome:** Users can navigate to a new Gallery section from the site menu, view images in a responsive grid, and click an image to open a larger preview that can be closed via a button or the Escape key.
+**User-visible outcome:** The browser tab shows the site favicon and no missing-favicon 404 appears in the network panel while running the app.

@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useActor } from './useActor';
+import type { Person } from '@/backend';
 
 interface BookingData {
-  customerName: string;
-  phone: string;
-  email: string;
+  sender: Person;
+  recipient: Person;
   pickupLocation: string;
   dropOffLocation: string;
   packageDetails: string;
@@ -23,12 +23,11 @@ export function useSubmitBooking() {
         throw new Error('Actor not initialized');
       }
       await actor.submitBooking(
-        data.customerName,
-        data.phone,
-        data.email,
+        data.sender,
+        data.recipient,
+        data.packageDetails,
         data.pickupLocation,
         data.dropOffLocation,
-        data.packageDetails,
         data.preferredPickupTime,
         data.notes,
         data.created

@@ -132,16 +132,21 @@ export interface Inquiry {
 }
 export interface Booking {
     id: bigint;
-    customerName: string;
     created: bigint;
     dropOffLocation: string;
+    recipient: Person;
     submittedBy: Principal;
-    email: string;
+    sender: Person;
     notes?: string;
     packageDetails: string;
-    phone: string;
     preferredPickupTime: string;
     pickupLocation: string;
+}
+export interface Person {
+    name: string;
+    email: string;
+    address: string;
+    phone: string;
 }
 export interface UserProfile {
     name: string;
@@ -168,12 +173,12 @@ export interface backendInterface {
     getUserProfile(user: Principal): Promise<UserProfile | null>;
     isCallerAdmin(): Promise<boolean>;
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
-    submitBooking(customerName: string, phone: string, email: string, pickupLocation: string, dropOffLocation: string, packageDetails: string, preferredPickupTime: string, notes: string | null, created: bigint): Promise<void>;
+    submitBooking(sender: Person, recipient: Person, packageDetails: string, pickupLocation: string, dropOffLocation: string, preferredPickupTime: string, notes: string | null, created: bigint): Promise<void>;
     submitInquiry(name: string, email: string, message: string, timestamp: bigint): Promise<void>;
     submitWhatsAppQuery(name: string, phone: string, email: string, message: string, courierPartner: string | null, timestamp: bigint): Promise<void>;
     updateShipmentStatus(trackingNumber: string, newStatus: string, location: string, timestamp: bigint): Promise<void>;
 }
-import type { Booking as _Booking, LabelDetails as _LabelDetails, ShipmentStatus as _ShipmentStatus, UserProfile as _UserProfile, UserRole as _UserRole, WhatsAppQuery as _WhatsAppQuery } from "./declarations/backend.did.d.ts";
+import type { Booking as _Booking, LabelDetails as _LabelDetails, Person as _Person, ShipmentStatus as _ShipmentStatus, UserProfile as _UserProfile, UserRole as _UserRole, WhatsAppQuery as _WhatsAppQuery } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
     async _initializeAccessControlWithSecret(arg0: string): Promise<void> {
@@ -386,17 +391,17 @@ export class Backend implements backendInterface {
             return result;
         }
     }
-    async submitBooking(arg0: string, arg1: string, arg2: string, arg3: string, arg4: string, arg5: string, arg6: string, arg7: string | null, arg8: bigint): Promise<void> {
+    async submitBooking(arg0: Person, arg1: Person, arg2: string, arg3: string, arg4: string, arg5: string, arg6: string | null, arg7: bigint): Promise<void> {
         if (this.processError) {
             try {
-                const result = await this.actor.submitBooking(arg0, arg1, arg2, arg3, arg4, arg5, arg6, to_candid_opt_n15(this._uploadFile, this._downloadFile, arg7), arg8);
+                const result = await this.actor.submitBooking(arg0, arg1, arg2, arg3, arg4, arg5, to_candid_opt_n15(this._uploadFile, this._downloadFile, arg6), arg7);
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.submitBooking(arg0, arg1, arg2, arg3, arg4, arg5, arg6, to_candid_opt_n15(this._uploadFile, this._downloadFile, arg7), arg8);
+            const result = await this.actor.submitBooking(arg0, arg1, arg2, arg3, arg4, arg5, to_candid_opt_n15(this._uploadFile, this._downloadFile, arg6), arg7);
             return result;
         }
     }
@@ -466,39 +471,36 @@ function from_candid_opt_n6(_uploadFile: (file: ExternalBlob) => Promise<Uint8Ar
 }
 function from_candid_record_n5(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
     id: bigint;
-    customerName: string;
     created: bigint;
     dropOffLocation: string;
+    recipient: _Person;
     submittedBy: Principal;
-    email: string;
+    sender: _Person;
     notes: [] | [string];
     packageDetails: string;
-    phone: string;
     preferredPickupTime: string;
     pickupLocation: string;
 }): {
     id: bigint;
-    customerName: string;
     created: bigint;
     dropOffLocation: string;
+    recipient: Person;
     submittedBy: Principal;
-    email: string;
+    sender: Person;
     notes?: string;
     packageDetails: string;
-    phone: string;
     preferredPickupTime: string;
     pickupLocation: string;
 } {
     return {
         id: value.id,
-        customerName: value.customerName,
         created: value.created,
         dropOffLocation: value.dropOffLocation,
+        recipient: value.recipient,
         submittedBy: value.submittedBy,
-        email: value.email,
+        sender: value.sender,
         notes: record_opt_to_undefined(from_candid_opt_n6(_uploadFile, _downloadFile, value.notes)),
         packageDetails: value.packageDetails,
-        phone: value.phone,
         preferredPickupTime: value.preferredPickupTime,
         pickupLocation: value.pickupLocation
     };

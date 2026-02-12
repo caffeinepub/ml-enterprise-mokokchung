@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Package, MapPin, Calendar, Loader2 } from 'lucide-react';
+import { Package, MapPin, Calendar, Loader2, User, UserCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -7,15 +7,21 @@ import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
 import { useSubmitBooking } from '@/hooks/useSubmitBooking';
 import { validateBookingForm } from '@/lib/validation/booking';
 import { useOneShotTimeout } from '@/hooks/useOneShotTimeout';
 
 export function BookingSection() {
   const [formData, setFormData] = useState({
-    customerName: '',
-    phone: '',
-    email: '',
+    senderName: '',
+    senderPhone: '',
+    senderEmail: '',
+    senderAddress: '',
+    receiverName: '',
+    receiverPhone: '',
+    receiverEmail: '',
+    receiverAddress: '',
     pickupLocation: '',
     dropOffLocation: '',
     packageDetails: '',
@@ -30,9 +36,14 @@ export function BookingSection() {
   useOneShotTimeout(
     () => {
       setFormData({
-        customerName: '',
-        phone: '',
-        email: '',
+        senderName: '',
+        senderPhone: '',
+        senderEmail: '',
+        senderAddress: '',
+        receiverName: '',
+        receiverPhone: '',
+        receiverEmail: '',
+        receiverAddress: '',
         pickupLocation: '',
         dropOffLocation: '',
         packageDetails: '',
@@ -69,9 +80,18 @@ export function BookingSection() {
     }
 
     submitBooking({
-      customerName: formData.customerName,
-      phone: formData.phone,
-      email: formData.email,
+      sender: {
+        name: formData.senderName,
+        phone: formData.senderPhone,
+        email: formData.senderEmail,
+        address: formData.senderAddress
+      },
+      recipient: {
+        name: formData.receiverName,
+        phone: formData.receiverPhone,
+        email: formData.receiverEmail,
+        address: formData.receiverAddress
+      },
       pickupLocation: formData.pickupLocation,
       dropOffLocation: formData.dropOffLocation,
       packageDetails: formData.packageDetails,
@@ -149,6 +169,12 @@ export function BookingSection() {
                 <div className="flex items-start space-x-3">
                   <div className="h-2 w-2 rounded-full bg-accent mt-2" />
                   <p className="text-sm text-muted-foreground">
+                    Complete sender and receiver contact information
+                  </p>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="h-2 w-2 rounded-full bg-accent mt-2" />
+                  <p className="text-sm text-muted-foreground">
                     Complete pickup and drop-off addresses
                   </p>
                 </div>
@@ -162,12 +188,6 @@ export function BookingSection() {
                   <div className="h-2 w-2 rounded-full bg-accent mt-2" />
                   <p className="text-sm text-muted-foreground">
                     Your preferred pickup date and time
-                  </p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="h-2 w-2 rounded-full bg-accent mt-2" />
-                  <p className="text-sm text-muted-foreground">
-                    Contact information for coordination
                   </p>
                 </div>
               </CardContent>
@@ -189,126 +209,232 @@ export function BookingSection() {
                 />
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="customerName">Full Name *</Label>
-                  <Input
-                    id="customerName"
-                    name="customerName"
-                    value={formData.customerName}
-                    onChange={handleChange}
-                    placeholder="Enter your name"
-                    className={errors.customerName ? 'border-destructive' : ''}
-                  />
-                  {errors.customerName && (
-                    <p className="text-sm text-destructive">{errors.customerName}</p>
-                  )}
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Sender Section */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2">
+                    <User className="h-5 w-5 text-accent" />
+                    <h3 className="font-semibold text-lg">Sender Information</h3>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="senderName">Sender Name *</Label>
+                    <Input
+                      id="senderName"
+                      name="senderName"
+                      value={formData.senderName}
+                      onChange={handleChange}
+                      placeholder="Enter sender's full name"
+                      className={errors.senderName ? 'border-destructive' : ''}
+                    />
+                    {errors.senderName && (
+                      <p className="text-sm text-destructive">{errors.senderName}</p>
+                    )}
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="senderPhone">Sender Phone *</Label>
+                      <Input
+                        id="senderPhone"
+                        name="senderPhone"
+                        value={formData.senderPhone}
+                        onChange={handleChange}
+                        placeholder="Enter sender's phone"
+                        className={errors.senderPhone ? 'border-destructive' : ''}
+                      />
+                      {errors.senderPhone && (
+                        <p className="text-sm text-destructive">{errors.senderPhone}</p>
+                      )}
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="senderEmail">Sender Email *</Label>
+                      <Input
+                        id="senderEmail"
+                        name="senderEmail"
+                        type="email"
+                        value={formData.senderEmail}
+                        onChange={handleChange}
+                        placeholder="Enter sender's email"
+                        className={errors.senderEmail ? 'border-destructive' : ''}
+                      />
+                      {errors.senderEmail && (
+                        <p className="text-sm text-destructive">{errors.senderEmail}</p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="senderAddress">Sender Address *</Label>
+                    <Input
+                      id="senderAddress"
+                      name="senderAddress"
+                      value={formData.senderAddress}
+                      onChange={handleChange}
+                      placeholder="Enter sender's complete address"
+                      className={errors.senderAddress ? 'border-destructive' : ''}
+                    />
+                    {errors.senderAddress && (
+                      <p className="text-sm text-destructive">{errors.senderAddress}</p>
+                    )}
+                  </div>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-4">
+                <Separator />
+
+                {/* Receiver Section */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2">
+                    <UserCheck className="h-5 w-5 text-accent" />
+                    <h3 className="font-semibold text-lg">Receiver Information</h3>
+                  </div>
+                  
                   <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number *</Label>
+                    <Label htmlFor="receiverName">Receiver Name *</Label>
                     <Input
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
+                      id="receiverName"
+                      name="receiverName"
+                      value={formData.receiverName}
                       onChange={handleChange}
-                      placeholder="Enter your phone"
-                      className={errors.phone ? 'border-destructive' : ''}
+                      placeholder="Enter receiver's full name"
+                      className={errors.receiverName ? 'border-destructive' : ''}
                     />
-                    {errors.phone && (
-                      <p className="text-sm text-destructive">{errors.phone}</p>
+                    {errors.receiverName && (
+                      <p className="text-sm text-destructive">{errors.receiverName}</p>
+                    )}
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="receiverPhone">Receiver Phone *</Label>
+                      <Input
+                        id="receiverPhone"
+                        name="receiverPhone"
+                        value={formData.receiverPhone}
+                        onChange={handleChange}
+                        placeholder="Enter receiver's phone"
+                        className={errors.receiverPhone ? 'border-destructive' : ''}
+                      />
+                      {errors.receiverPhone && (
+                        <p className="text-sm text-destructive">{errors.receiverPhone}</p>
+                      )}
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="receiverEmail">Receiver Email *</Label>
+                      <Input
+                        id="receiverEmail"
+                        name="receiverEmail"
+                        type="email"
+                        value={formData.receiverEmail}
+                        onChange={handleChange}
+                        placeholder="Enter receiver's email"
+                        className={errors.receiverEmail ? 'border-destructive' : ''}
+                      />
+                      {errors.receiverEmail && (
+                        <p className="text-sm text-destructive">{errors.receiverEmail}</p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="receiverAddress">Receiver Address *</Label>
+                    <Input
+                      id="receiverAddress"
+                      name="receiverAddress"
+                      value={formData.receiverAddress}
+                      onChange={handleChange}
+                      placeholder="Enter receiver's complete address"
+                      className={errors.receiverAddress ? 'border-destructive' : ''}
+                    />
+                    {errors.receiverAddress && (
+                      <p className="text-sm text-destructive">{errors.receiverAddress}</p>
+                    )}
+                  </div>
+                </div>
+
+                <Separator />
+
+                {/* Shipment Details Section */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2">
+                    <Package className="h-5 w-5 text-accent" />
+                    <h3 className="font-semibold text-lg">Shipment Details</h3>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="pickupLocation">Pickup Location *</Label>
+                    <Input
+                      id="pickupLocation"
+                      name="pickupLocation"
+                      value={formData.pickupLocation}
+                      onChange={handleChange}
+                      placeholder="Enter pickup address"
+                      className={errors.pickupLocation ? 'border-destructive' : ''}
+                    />
+                    {errors.pickupLocation && (
+                      <p className="text-sm text-destructive">{errors.pickupLocation}</p>
                     )}
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email Address *</Label>
+                    <Label htmlFor="dropOffLocation">Drop-off Location *</Label>
                     <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
+                      id="dropOffLocation"
+                      name="dropOffLocation"
+                      value={formData.dropOffLocation}
                       onChange={handleChange}
-                      placeholder="Enter your email"
-                      className={errors.email ? 'border-destructive' : ''}
+                      placeholder="Enter delivery address"
+                      className={errors.dropOffLocation ? 'border-destructive' : ''}
                     />
-                    {errors.email && (
-                      <p className="text-sm text-destructive">{errors.email}</p>
+                    {errors.dropOffLocation && (
+                      <p className="text-sm text-destructive">{errors.dropOffLocation}</p>
                     )}
                   </div>
-                </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="pickupLocation">Pickup Location *</Label>
-                  <Input
-                    id="pickupLocation"
-                    name="pickupLocation"
-                    value={formData.pickupLocation}
-                    onChange={handleChange}
-                    placeholder="Enter pickup address"
-                    className={errors.pickupLocation ? 'border-destructive' : ''}
-                  />
-                  {errors.pickupLocation && (
-                    <p className="text-sm text-destructive">{errors.pickupLocation}</p>
-                  )}
-                </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="packageDetails">Package Details *</Label>
+                    <Textarea
+                      id="packageDetails"
+                      name="packageDetails"
+                      value={formData.packageDetails}
+                      onChange={handleChange}
+                      placeholder="Describe your package (size, weight, contents, special handling)"
+                      rows={3}
+                      className={errors.packageDetails ? 'border-destructive' : ''}
+                    />
+                    {errors.packageDetails && (
+                      <p className="text-sm text-destructive">{errors.packageDetails}</p>
+                    )}
+                  </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="dropOffLocation">Drop-off Location *</Label>
-                  <Input
-                    id="dropOffLocation"
-                    name="dropOffLocation"
-                    value={formData.dropOffLocation}
-                    onChange={handleChange}
-                    placeholder="Enter delivery address"
-                    className={errors.dropOffLocation ? 'border-destructive' : ''}
-                  />
-                  {errors.dropOffLocation && (
-                    <p className="text-sm text-destructive">{errors.dropOffLocation}</p>
-                  )}
-                </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="preferredPickupTime">Preferred Pickup Date & Time *</Label>
+                    <Input
+                      id="preferredPickupTime"
+                      name="preferredPickupTime"
+                      value={formData.preferredPickupTime}
+                      onChange={handleChange}
+                      placeholder="e.g., Tomorrow 10 AM, Jan 15 2:00 PM"
+                      className={errors.preferredPickupTime ? 'border-destructive' : ''}
+                    />
+                    {errors.preferredPickupTime && (
+                      <p className="text-sm text-destructive">{errors.preferredPickupTime}</p>
+                    )}
+                  </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="packageDetails">Package Details *</Label>
-                  <Textarea
-                    id="packageDetails"
-                    name="packageDetails"
-                    value={formData.packageDetails}
-                    onChange={handleChange}
-                    placeholder="Describe your package (size, weight, contents, special handling)"
-                    rows={3}
-                    className={errors.packageDetails ? 'border-destructive' : ''}
-                  />
-                  {errors.packageDetails && (
-                    <p className="text-sm text-destructive">{errors.packageDetails}</p>
-                  )}
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="preferredPickupTime">Preferred Pickup Date & Time *</Label>
-                  <Input
-                    id="preferredPickupTime"
-                    name="preferredPickupTime"
-                    value={formData.preferredPickupTime}
-                    onChange={handleChange}
-                    placeholder="e.g., Tomorrow 10 AM, Jan 15 2:00 PM"
-                    className={errors.preferredPickupTime ? 'border-destructive' : ''}
-                  />
-                  {errors.preferredPickupTime && (
-                    <p className="text-sm text-destructive">{errors.preferredPickupTime}</p>
-                  )}
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="notes">Additional Notes (Optional)</Label>
-                  <Textarea
-                    id="notes"
-                    name="notes"
-                    value={formData.notes}
-                    onChange={handleChange}
-                    placeholder="Any special instructions or requirements..."
-                    rows={3}
-                  />
+                  <div className="space-y-2">
+                    <Label htmlFor="notes">Additional Notes (Optional)</Label>
+                    <Textarea
+                      id="notes"
+                      name="notes"
+                      value={formData.notes}
+                      onChange={handleChange}
+                      placeholder="Any special instructions or requirements..."
+                      rows={3}
+                    />
+                  </div>
                 </div>
 
                 {isSuccess && (
