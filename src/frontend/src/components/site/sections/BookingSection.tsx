@@ -25,8 +25,7 @@ export function BookingSection() {
     pickupLocation: '',
     dropOffLocation: '',
     packageDetails: '',
-    preferredPickupTime: '',
-    notes: ''
+    preferredPickupTime: ''
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -47,8 +46,7 @@ export function BookingSection() {
         pickupLocation: '',
         dropOffLocation: '',
         packageDetails: '',
-        preferredPickupTime: '',
-        notes: ''
+        preferredPickupTime: ''
       });
       setErrors({});
       resetMutation();
@@ -96,7 +94,7 @@ export function BookingSection() {
       dropOffLocation: formData.dropOffLocation,
       packageDetails: formData.packageDetails,
       preferredPickupTime: formData.preferredPickupTime,
-      notes: formData.notes.trim() || null,
+      notes: null,
       created: BigInt(Date.now())
     });
   };
@@ -423,45 +421,36 @@ export function BookingSection() {
                       <p className="text-sm text-destructive">{errors.preferredPickupTime}</p>
                     )}
                   </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="notes">Additional Notes (Optional)</Label>
-                    <Textarea
-                      id="notes"
-                      name="notes"
-                      value={formData.notes}
-                      onChange={handleChange}
-                      placeholder="Any special instructions or requirements..."
-                      rows={3}
-                    />
-                  </div>
                 </div>
 
+                {/* Success/Error Messages */}
                 {isSuccess && (
-                  <Alert className="bg-accent/10 border-accent">
-                    <AlertDescription className="text-accent-foreground">
-                      Thank you! Your booking has been submitted successfully. We'll contact you shortly to confirm.
+                  <Alert className="bg-green-50 border-green-200">
+                    <AlertDescription className="text-green-800">
+                      Booking submitted successfully! We'll contact you shortly to confirm.
                     </AlertDescription>
                   </Alert>
                 )}
 
                 {isError && (
-                  <Alert variant="destructive">
-                    <AlertDescription>
-                      Failed to submit booking. Please try again or contact us directly.
+                  <Alert className="bg-destructive/10 border-destructive/20">
+                    <AlertDescription className="text-destructive">
+                      Failed to submit booking. Please try again.
                     </AlertDescription>
                   </Alert>
                 )}
 
-                <Button
-                  type="submit"
-                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
+                {/* Submit Button */}
+                <Button 
+                  type="submit" 
+                  className="w-full" 
+                  size="lg"
                   disabled={isPending || !isFormValid}
                 >
                   {isPending ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Submitting Booking...
+                      Submitting...
                     </>
                   ) : (
                     'Submit Booking'

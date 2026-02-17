@@ -29,7 +29,7 @@ export function useSubmitBooking() {
         data.pickupLocation,
         data.dropOffLocation,
         data.preferredPickupTime,
-        data.notes,
+        null,
         data.created
       );
     },

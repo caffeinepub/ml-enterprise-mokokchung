@@ -16,7 +16,6 @@ interface BookingFormData {
   dropOffLocation: string;
   packageDetails: string;
   preferredPickupTime: string;
-  notes: string;
 }
 
 export function validateBookingForm(data: BookingFormData): ValidationResult {
@@ -103,8 +102,6 @@ export function validateBookingForm(data: BookingFormData): ValidationResult {
   if (!data.preferredPickupTime.trim()) {
     errors.preferredPickupTime = 'Preferred pickup time is required';
   }
-
-  // Notes are optional, no validation needed
 
   return {
     isValid: Object.keys(errors).length === 0,

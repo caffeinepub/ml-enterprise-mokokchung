@@ -1,26 +1,66 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Add favicon asset and wire it in HTML entry point",
+  "title": "Remove Courier Partners section and navigation link from single-page layout",
   "requirements": [
     {
-      "id": "REQ-1",
-      "summary": "Add a favicon static asset under frontend/public and reference it from the HTML entry point so browsers display the site icon.",
+      "id": "REQ-4",
+      "summary": "Remove the Courier Partners section from the single-page layout so it no longer renders.",
       "acceptanceCriteria": [
-        "A favicon file exists under frontend/public (for example: frontend/public/favicon.svg and/or frontend/public/favicon.ico).",
-        "frontend/index.html includes appropriate <link rel=\"icon\" ...> tag(s) referencing the new favicon file(s).",
-        "When running the app in a browser, the tab icon shows the new favicon (no missing favicon 404 in devtools network panel)."
+        "The Courier Partners section is no longer rendered in the main page flow (it should not appear between Coverage and Tracking anymore).",
+        "The Courier Partners section does not appear in the DOM and cannot be reached by scrolling."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/generated/favicon-ml-badge.dim_512x512.png",
-          "operation": "create",
-          "description": "Add the generated favicon image asset (Simple flat monogram logo \"ML\" in a circular badge) as a static file to be served directly from frontend/public. This must be the exact file path/name required by imageRequirements."
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Remove the CourierPartnersSection import and remove the <CourierPartnersSection /> from the main section composition so it no longer renders between Coverage and Tracking."
         },
         {
-          "path": "frontend/index.html",
+          "path": "frontend/src/components/site/sections/CourierPartnersSection.tsx",
+          "operation": "delete",
+          "description": "Delete the CourierPartnersSection implementation so the \"courier-partners\" section anchor cannot be rendered anywhere in the app."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Remove the \"Courier Partners\" navigation link from header navigation (desktop and mobile).",
+      "acceptanceCriteria": [
+        "Desktop navigation no longer shows a \"Courier Partners\" link.",
+        "Mobile navigation no longer shows a \"Courier Partners\" link.",
+        "No navigation action attempts to scroll to \"#courier-partners\"."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/site/SiteHeader.tsx",
           "operation": "modify",
-          "description": "Add appropriate favicon <link rel=\"icon\" ...> tag(s) in the <head> referencing the static favicon image at frontend/public/assets/generated/favicon-ml-badge.dim_512x512.png so the browser loads it without 404s."
+          "description": "Remove the \"Courier Partners\" entry from the navLinks array so neither the desktop buttons nor the mobile Sheet menu renders or attempts to scroll to \"#courier-partners\"."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Remove any remaining in-app references to the \"#courier-partners\" anchor to prevent broken navigation.",
+      "acceptanceCriteria": [
+        "No UI element attempts to scroll to or reference \"#courier-partners\".",
+        "The page navigation and scrolling behavior continues to work for all remaining sections (Home, Services, About, Coverage, Tracking, Label Print, Booking, Contact)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/site/SiteHeader.tsx",
+          "operation": "modify",
+          "description": "Audit the header scroll navigation to ensure no remaining references to \"#courier-partners\" exist after removing the nav link, and verify scrollToSection continues working for all remaining section anchors."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Audit the main section composition to ensure there are no remaining references to the removed \"courier-partners\" anchor and that the order/anchors for the remaining sections are unchanged."
+        },
+        {
+          "path": "frontend/src/components/site/SiteFooter.tsx",
+          "operation": "modify",
+          "description": "Audit footer quick links to confirm there is no \"Courier Partners\" link and no \"#courier-partners\" reference, keeping existing smooth scroll behavior for the remaining sections."
         }
       ]
     }

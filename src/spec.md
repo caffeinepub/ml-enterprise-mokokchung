@@ -1,10 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Add a favicon static asset to the frontend so browsers display the site icon.
+**Goal:** Remove the Courier Partners section and any related navigation so it no longer appears or is referenced anywhere on the single-page site.
 
 **Planned changes:**
-- Add favicon asset file(s) under `frontend/public`.
-- Update `frontend/index.html` to reference the favicon via appropriate `<link rel="icon" ...>` tag(s).
+- Remove the Courier Partners section from the single-page layout so it does not render in the page flow.
+- Remove the "Courier Partners" link from both desktop and mobile header navigation.
+- Remove any remaining in-app references to the "#courier-partners" anchor to avoid broken navigation.
 
-**User-visible outcome:** The browser tab shows the site favicon and no missing-favicon 404 appears in the network panel while running the app.
+**User-visible outcome:** The site no longer shows a Courier Partners section, and the navigation/menu contains no Courier Partners link; scrolling/anchor navigation continues to work for the remaining sections.

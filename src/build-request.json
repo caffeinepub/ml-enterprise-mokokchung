@@ -1,39 +1,72 @@
 {
   "kind": "build_request",
-  "title": "Add a favicon file to the frontend",
+  "title": "Remove Courier Partners section from the site",
+  "projectName": "ML Enterprise Site",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-1",
-      "text": "Add favicon static asset(s) to the frontend and reference them from the HTML entry point so browsers display the site icon.",
+      "id": "REQ-4",
+      "text": "Remove the Courier Partners section from the single-page layout so it no longer renders on the page.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-3"
+          "msg-1"
         ],
         "quotes": [
-          "ADD FILE"
+          "remove courier partner"
         ]
       },
       "acceptanceCriteria": [
-        "A favicon file exists under frontend/public (for example: frontend/public/favicon.svg and/or frontend/public/favicon.ico).",
-        "frontend/index.html includes appropriate <link rel=\"icon\" ...> tag(s) referencing the new favicon file(s).",
-        "When running the app in a browser, the tab icon shows the new favicon (no missing favicon 404 in devtools network panel)."
+        "The Courier Partners section is no longer rendered in the main page flow (it should not appear between Coverage and Tracking anymore).",
+        "The Courier Partners section does not appear in the DOM and cannot be reached by scrolling."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Remove the \"Courier Partners\" navigation link so the header navigation no longer includes a link to \"#courier-partners\".",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "remove courier partner"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Desktop navigation no longer shows a \"Courier Partners\" link.",
+        "Mobile navigation no longer shows a \"Courier Partners\" link.",
+        "No navigation action attempts to scroll to \"#courier-partners\"."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Ensure there are no remaining in-app references to the Courier Partners section anchor (\"#courier-partners\") that could cause broken navigation or dead links.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "remove courier partner"
+        ]
+      },
+      "acceptanceCriteria": [
+        "No UI element attempts to scroll to or reference \"#courier-partners\".",
+        "The page navigation and scrolling behavior continues to work for all remaining sections (Home, Services, About, Coverage, Tracking, Label Print, Booking, Contact)."
       ]
     }
   ],
   "constraints": [
-    "Do not modify files under frontend/src/components/ui or any frontend immutablePaths listed in SYSTEM_CONTEXT.",
-    "Treat favicon assets as static files served from frontend/public (do not route image bytes through the backend)."
+    "Frontend files listed as immutable in SYSTEM_CONTEXT must not be edited (compose instead).",
+    "Keep the existing single-page section anchor navigation behavior for all remaining sections."
   ],
   "nonGoals": [
-    "Implementing PWA manifest, apple-touch-icon, or full cross-platform icon set unless explicitly requested.",
-    "Changing any booking/sender/receiver functionality."
+    "Do not change backend Motoko APIs or stored data related to WhatsApp queries unless required for compilation.",
+    "Do not redesign or alter other site sections beyond removing the Courier Partners section and its navigation link."
   ],
   "imageRequirements": {
-    "required": [
-      "Simple flat monogram logo with the letters \"ML\" in a circular badge, charcoal and orange, centered (favicon-ml-badge.dim_512x512.png)"
-    ],
+    "required": [],
     "edits": []
   }
 }

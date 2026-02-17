@@ -3,8 +3,6 @@ import { HeroSection } from './components/site/sections/HeroSection';
 import { ServicesSection } from './components/site/sections/ServicesSection';
 import { AboutSection } from './components/site/sections/AboutSection';
 import { CoverageSection } from './components/site/sections/CoverageSection';
-import { CourierPartnersSection } from './components/site/sections/CourierPartnersSection';
-import { GallerySection } from './components/site/sections/GallerySection';
 import { TrackingSection } from './components/site/sections/TrackingSection';
 import { LabelPrintSection } from './components/site/sections/LabelPrintSection';
 import { BookingSection } from './components/site/sections/BookingSection';
@@ -20,8 +18,6 @@ function App() {
         <ServicesSection />
         <AboutSection />
         <CoverageSection />
-        <CourierPartnersSection />
-        <GallerySection />
         <TrackingSection />
         <LabelPrintSection />
         <BookingSection />
