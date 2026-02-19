@@ -32,12 +32,10 @@ export function SiteHeader() {
           {/* Brand */}
           <button
             onClick={() => scrollToSection('#home')}
-            className="flex items-center hover:opacity-80 transition-opacity"
+            className="flex flex-col gap-0.5 hover:opacity-80 transition-opacity"
           >
-            <div className="flex flex-col">
-              <span className="font-display font-bold text-lg leading-tight">ML Enterprise</span>
-              <span className="text-xs text-muted-foreground">Mokokchung</span>
-            </div>
+            <span className="font-display font-bold text-xl md:text-2xl leading-tight">ML Enterprise</span>
+            <span className="text-sm md:text-base text-muted-foreground leading-tight">Mokokchung</span>
           </button>
 
           {/* Desktop Navigation */}

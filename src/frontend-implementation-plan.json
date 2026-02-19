@@ -1,66 +1,22 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Remove Courier Partners section and navigation link from single-page layout",
+  "title": "Resize and rebalance header brand/logo block",
   "requirements": [
     {
-      "id": "REQ-4",
-      "summary": "Remove the Courier Partners section from the single-page layout so it no longer renders.",
+      "id": "REQ-1",
+      "summary": "Adjust header brand/logo typography and spacing to improve visibility across breakpoints while keeping header layout and brand click behavior intact.",
       "acceptanceCriteria": [
-        "The Courier Partners section is no longer rendered in the main page flow (it should not appear between Coverage and Tracking anymore).",
-        "The Courier Partners section does not appear in the DOM and cannot be reached by scrolling."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Remove the CourierPartnersSection import and remove the <CourierPartnersSection /> from the main section composition so it no longer renders between Coverage and Tracking."
-        },
-        {
-          "path": "frontend/src/components/site/sections/CourierPartnersSection.tsx",
-          "operation": "delete",
-          "description": "Delete the CourierPartnersSection implementation so the \"courier-partners\" section anchor cannot be rendered anywhere in the app."
-        }
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "summary": "Remove the \"Courier Partners\" navigation link from header navigation (desktop and mobile).",
-      "acceptanceCriteria": [
-        "Desktop navigation no longer shows a \"Courier Partners\" link.",
-        "Mobile navigation no longer shows a \"Courier Partners\" link.",
-        "No navigation action attempts to scroll to \"#courier-partners\"."
+        "On mobile and desktop, the header brand block on the left is visibly resized (larger or smaller as implemented) compared to the current `text-lg`/`text-xs` styling.",
+        "The header height, navigation alignment, and mobile menu button remain vertically centered and do not overlap the resized brand block.",
+        "Clicking/tapping the brand block still scrolls smoothly to `#home` and closes the mobile sheet if it is open.",
+        "No user-facing text is changed (brand still reads “ML Enterprise” and “Mokokchung”)."
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/site/SiteHeader.tsx",
           "operation": "modify",
-          "description": "Remove the \"Courier Partners\" entry from the navLinks array so neither the desktop buttons nor the mobile Sheet menu renders or attempts to scroll to \"#courier-partners\"."
-        }
-      ]
-    },
-    {
-      "id": "REQ-6",
-      "summary": "Remove any remaining in-app references to the \"#courier-partners\" anchor to prevent broken navigation.",
-      "acceptanceCriteria": [
-        "No UI element attempts to scroll to or reference \"#courier-partners\".",
-        "The page navigation and scrolling behavior continues to work for all remaining sections (Home, Services, About, Coverage, Tracking, Label Print, Booking, Contact)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/site/SiteHeader.tsx",
-          "operation": "modify",
-          "description": "Audit the header scroll navigation to ensure no remaining references to \"#courier-partners\" exist after removing the nav link, and verify scrollToSection continues working for all remaining section anchors."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Audit the main section composition to ensure there are no remaining references to the removed \"courier-partners\" anchor and that the order/anchors for the remaining sections are unchanged."
-        },
-        {
-          "path": "frontend/src/components/site/SiteFooter.tsx",
-          "operation": "modify",
-          "description": "Audit footer quick links to confirm there is no \"Courier Partners\" link and no \"#courier-partners\" reference, keeping existing smooth scroll behavior for the remaining sections."
+          "description": "Update the left-side brand button styles to use responsive font sizes (e.g., base vs sm/md), line-height, and controlled vertical gap so the brand is clearly visible without increasing header height or causing overlap. Ensure the brand button remains vertically centered within the existing `h-16` header row, and preserve the existing `scrollToSection('#home')` behavior (including closing the mobile Sheet). Since the header uses shadcn-ui Button/Sheet components, ensure the changes do not interfere with their layout/interaction; verify the component's usage instructions before implementing."
         }
       ]
     }

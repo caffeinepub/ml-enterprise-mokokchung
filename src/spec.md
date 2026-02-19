@@ -1,11 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Remove the Courier Partners section and any related navigation so it no longer appears or is referenced anywhere on the single-page site.
+**Goal:** Make the header’s left-side brand/logo block (“ML Enterprise” / “Mokokchung”) render at a more appropriate, clearly visible size on both mobile and desktop without breaking the header layout.
 
 **Planned changes:**
-- Remove the Courier Partners section from the single-page layout so it does not render in the page flow.
-- Remove the "Courier Partners" link from both desktop and mobile header navigation.
-- Remove any remaining in-app references to the "#courier-partners" anchor to avoid broken navigation.
+- Update the sizing (typography scale) and spacing of the header brand block in `frontend/src/components/site/SiteHeader.tsx`.
+- Ensure the header height, nav alignment, and mobile menu button remain vertically centered and do not overlap the resized brand block.
+- Preserve existing brand block behavior: clicking/tapping scrolls smoothly to `#home` and closes the mobile menu sheet if open.
 
-**User-visible outcome:** The site no longer shows a Courier Partners section, and the navigation/menu contains no Courier Partners link; scrolling/anchor navigation continues to work for the remaining sections.
+**User-visible outcome:** The header brand (“ML Enterprise” / “Mokokchung”) appears at a more readable size on mobile and desktop, while the header layout and interactions remain unchanged.

@@ -2,7 +2,7 @@
   "frontend/src/index.css": "Global styles with OKLCH color system defining charcoal/white theme with vibrant orange accents for light and dark modes, utility classes for sections, and print-specific styles for label printing.",
   "frontend/tailwind.config.js": "Tailwind configuration extending the theme with custom fonts (Inter, Outfit), colors mapped to CSS variables, custom border radius, shadows, and animations.",
   "frontend/src/App.tsx": "Main application component composing the complete single-page marketing site with header, hero, services, about, coverage, tracking, label print, booking, contact sections, and footer (Courier Partners section removed).",
-  "frontend/src/components/site/SiteHeader.tsx": "Responsive header with ML Enterprise brand text, desktop and mobile navigation menus with \"Book Now\" CTA button (Courier Partners link removed from navigation).",
+  "frontend/src/components/site/SiteHeader.tsx": "Responsive header with enlarged ML Enterprise brand text (text-xl/2xl for main, text-sm/base for subtitle), desktop and mobile navigation menus with \"Book Now\" CTA button.",
   "frontend/src/components/site/sections/HeroSection.tsx": "Hero section featuring headline, supporting copy with nationwide pickup claim, stats, two CTA buttons scrolling to contact, and hero banner image.",
   "frontend/src/components/site/sections/ServicesSection.tsx": "Services section displaying four service cards with icons, descriptions, and feature bullets including nationwide pickup in the Logistics & Transport card.",
   "frontend/src/components/site/sections/AboutSection.tsx": "About section with company description and four value cards highlighting reliability, customer focus, excellence, and local expertise.",

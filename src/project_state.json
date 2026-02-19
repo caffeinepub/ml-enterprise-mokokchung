@@ -7,26 +7,10 @@
   "isFixRequest": false,
   "existing_features": [
     {
-      "id": "feature-remove-the-courier-partners-section-from-the-single-page-layout-so-it-no-longer-renders-on-the-page",
-      "title": "Remove the Courier Partners section from the single-page layout so it no longer renders on the page.",
+      "id": "feature-adjust-the-size-and-spacing-of-the-header-brand-logo-area-in-frontend-src-components-site-siteheader-tsx-the-left-side-ml-enterprise-mokokchung-brand-block-so-it-renders-at-a-more-appropriate-clearly-visible-size-across-mobile-and-desktop-without-breaking-the-header-layout",
+      "title": "Adjust the size and spacing of the header brand/logo area in `frontend/src/components/site/SiteHeader.tsx` (the left-side “ML Enterprise” / “Mokokchung” brand block) so it renders at a more appropriate, clearly visible size across mobile and desktop without breaking the header layout.",
       "reqIds": [
-        "REQ-4"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-remove-the-courier-partners-navigation-link-so-the-header-navigation-no-longer-includes-a-link-to-courier-partners",
-      "title": "Remove the \"Courier Partners\" navigation link so the header navigation no longer includes a link to \"#courier-partners\".",
-      "reqIds": [
-        "REQ-5"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-ensure-there-are-no-remaining-in-app-references-to-the-courier-partners-section-anchor-courier-partners-that-could-cause-broken-navigation-or-dead-links",
-      "title": "Ensure there are no remaining in-app references to the Courier Partners section anchor (\"#courier-partners\") that could cause broken navigation or dead links.",
-      "reqIds": [
-        "REQ-6"
+        "REQ-1"
       ],
       "version": 1
     }
@@ -34,7 +18,7 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Remove courier partner from the page/app",
+      "summary": "Adjust the logo size (logo shown on the left)",
       "reqIds": [],
       "status": "pending"
     }

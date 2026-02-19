@@ -2,28 +2,8 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-remove-the-courier-partners-section-from-the-single-page-layout-so-it-no-longer-renders-on-the-page",
-      "featureTitle": "Remove the Courier Partners section from the single-page layout so it no longer renders on the page.",
-      "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/site/sections/CourierPartnersSection.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-4"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-remove-the-courier-partners-navigation-link-so-the-header-navigation-no-longer-includes-a-link-to-courier-partners",
-      "featureTitle": "Remove the \"Courier Partners\" navigation link so the header navigation no longer includes a link to \"#courier-partners\".",
+      "featureId": "feature-adjust-the-size-and-spacing-of-the-header-brand-logo-area-in-frontend-src-components-site-siteheader-tsx-the-left-side-ml-enterprise-mokokchung-brand-block-so-it-renders-at-a-more-appropriate-clearly-visible-size-across-mobile-and-desktop-without-breaking-the-header-layout",
+      "featureTitle": "Adjust the size and spacing of the header brand/logo area in `frontend/src/components/site/SiteHeader.tsx` (the left-side “ML Enterprise” / “Mokokchung” brand block) so it renders at a more appropriate, clearly visible size across mobile and desktop without breaking the header layout.",
       "files": [
         "frontend/src/components/site/SiteHeader.tsx"
       ],
@@ -36,27 +16,7 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-5"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-ensure-there-are-no-remaining-in-app-references-to-the-courier-partners-section-anchor-courier-partners-that-could-cause-broken-navigation-or-dead-links",
-      "featureTitle": "Ensure there are no remaining in-app references to the Courier Partners section anchor (\"#courier-partners\") that could cause broken navigation or dead links.",
-      "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/site/SiteHeader.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-6"
+        "REQ-1"
       ],
       "confidence": "high"
     }

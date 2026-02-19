@@ -1,69 +1,36 @@
 {
   "kind": "build_request",
-  "title": "Remove Courier Partners section from the site",
+  "title": "Adjust header logo/brand size",
   "projectName": "ML Enterprise Site",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-4",
-      "text": "Remove the Courier Partners section from the single-page layout so it no longer renders on the page.",
+      "id": "REQ-1",
+      "text": "Adjust the size and spacing of the header brand/logo area in `frontend/src/components/site/SiteHeader.tsx` (the left-side “ML Enterprise” / “Mokokchung” brand block) so it renders at a more appropriate, clearly visible size across mobile and desktop without breaking the header layout.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-4"
         ],
         "quotes": [
-          "remove courier partner"
+          "yes"
         ]
       },
       "acceptanceCriteria": [
-        "The Courier Partners section is no longer rendered in the main page flow (it should not appear between Coverage and Tracking anymore).",
-        "The Courier Partners section does not appear in the DOM and cannot be reached by scrolling."
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "text": "Remove the \"Courier Partners\" navigation link so the header navigation no longer includes a link to \"#courier-partners\".",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "remove courier partner"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Desktop navigation no longer shows a \"Courier Partners\" link.",
-        "Mobile navigation no longer shows a \"Courier Partners\" link.",
-        "No navigation action attempts to scroll to \"#courier-partners\"."
-      ]
-    },
-    {
-      "id": "REQ-6",
-      "text": "Ensure there are no remaining in-app references to the Courier Partners section anchor (\"#courier-partners\") that could cause broken navigation or dead links.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ],
-        "quotes": [
-          "remove courier partner"
-        ]
-      },
-      "acceptanceCriteria": [
-        "No UI element attempts to scroll to or reference \"#courier-partners\".",
-        "The page navigation and scrolling behavior continues to work for all remaining sections (Home, Services, About, Coverage, Tracking, Label Print, Booking, Contact)."
+        "On mobile and desktop, the header brand block on the left is visibly resized (larger or smaller as implemented) compared to the current `text-lg`/`text-xs` styling.",
+        "The header height, navigation alignment, and mobile menu button remain vertically centered and do not overlap the resized brand block.",
+        "Clicking/tapping the brand block still scrolls smoothly to `#home` and closes the mobile sheet if it is open.",
+        "No user-facing text is changed (brand still reads “ML Enterprise” and “Mokokchung”)."
       ]
     }
   ],
   "constraints": [
-    "Frontend files listed as immutable in SYSTEM_CONTEXT must not be edited (compose instead).",
-    "Keep the existing single-page section anchor navigation behavior for all remaining sections."
+    "Frontend immutable paths listed in SYSTEM_CONTEXT must not be modified.",
+    "Use English for any user-facing text."
   ],
   "nonGoals": [
-    "Do not change backend Motoko APIs or stored data related to WhatsApp queries unless required for compilation.",
-    "Do not redesign or alter other site sections beyond removing the Courier Partners section and its navigation link."
+    "Do not add new navigation items or change section anchors/IDs.",
+    "Do not introduce backend changes or new backend endpoints."
   ],
   "imageRequirements": {
     "required": [],
